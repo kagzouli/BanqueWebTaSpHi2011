@@ -198,9 +198,10 @@
 		</dependency>
 
 		<dependency>
-            <groupId>jcommon</groupId>
-            <artifactId>jcommon</artifactId>
-        </dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jcommon</artifactId>
+		</dependency>
+    
 		
 		<dependency>
             <groupId>jfree</groupId>

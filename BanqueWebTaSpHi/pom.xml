@@ -201,6 +201,12 @@
             <groupId>jfree</groupId>
             <artifactId>jfreechart</artifactId>
         </dependency>
+        
+        <dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jcommon</artifactId>
+		</dependency>
+        
 
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>
