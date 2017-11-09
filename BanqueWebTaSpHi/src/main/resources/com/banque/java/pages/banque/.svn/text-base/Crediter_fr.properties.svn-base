@@ -1,0 +1,4 @@
+login.notfound=Aucun login %s n'a \u00E9t\u00E9 trouv\u00E9.
+amount.reached=Le montant maximum %6.2f a \u00E9t\u00E9 atteint.
+amount.mustbe.positive=Le montant doit \u00EAtre positif.
+text.page=Cr\u00E9diter compte

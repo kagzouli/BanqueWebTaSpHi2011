@@ -1,0 +1,117 @@
+10
+
+dir
+98
+http://188.165.47.58/depotsvn/BanqueWebTaSpHi/src/main/webapp
+http://188.165.47.58/depotsvn/BanqueWebTaSpHi
+
+
+
+2010-12-07T22:56:27.236018Z
+97
+karim
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ef33b8dd-246c-4f1d-8612-ce89f17dc010
+
+Index.tml
+file
+
+
+
+
+2012-02-13T13:24:47.042000Z
+85a3dc862163f1c5d68fb3f5d523b8be
+2010-12-06T19:16:41.193413Z
+60
+karim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+913
+
+META-INF
+dir
+
+WEB-INF
+dir
+
+banque
+dir
+
+components
+dir
+
+images
+dir
+
+jsp
+dir
+
+style.css
+file
+
+
+
+
+2012-02-13T13:24:47.492000Z
+4dd1becf7d79de68a4fc1191e1c8fdc8
+2010-12-03T19:06:28.159959Z
+23
+karim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3920
+
+user
+dir
+

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="true">
+
+	<context:spring-configured />
+	<context:annotation-config />
+
+
+
+	<context:component-scan base-package="com.banque.service" />
+	<context:component-scan base-package="com.banque.dao" />
+	
+	<bean id="EBPMDataSource" class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="true">
+    	<property name="jndiName" value="java:comp/env/jdbc/banque" />
+    	<!--  fallback to a local datasource if we are not in the container -->
+    	<property name="defaultObject" ref="localDataSource" />
+	</bean>	
+
+	<bean id="localDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" lazy-init="true">
+		<property name="driverClass" value="${database/testdb/${test/env}/driver}" />
+		<property name="jdbcUrl" value="${database/testdb/${test/env}/url}" />
+		<property name="user">
+			<value>${database/testdb/${test/env}/user}</value>
+		</property>
+		<property name="password">
+			<value>${database/testdb/${test/env}/password}</value>
+		</property>
+
+		<property name="initialPoolSize">
+			<value>${database/testdb/${test/env}/pool/minPoolSize}</value>
+		</property> 
+		<property name="maxPoolSize">
+			<value>${database/testdb/${test/env}/pool/maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${database/testdb/${test/env}/pool/maxStatements}</value>
+		</property>
+		
+	</bean>
+
+	<!-- Hibernate Session Factory -->
+	<bean id="testSessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+		lazy-init="true">
+		<property name="dataSource" ref="EBPMDataSource" />
+
+		<property name="configLocation">
+			<value>classpath:/com/banque/hibernate.cfg.xml</value>
+		</property>
+
+		<property name="configurationClass">
+			<value>org.hibernate.cfg.AnnotationConfiguration</value>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${database/testdb/${test/env}/hibernateDialect}
+				</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">ehcache.xml</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="connection.autocommit">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">${database/testdb/${test/env}/hibernateDialect}
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="txTestManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="testSessionFactory" />
+	</bean>
+
+	<tx:advice id="txAdviceTestFront" transaction-manager="txTestManager">
+		<tx:attributes>
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED"
+				rollback-for="com.banque.service.exception.BusinessException,com.banque.service.exception.TechnicalException" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<aop:config>
+		<aop:pointcut id="banqueServiceMethods"
+			expression="execution(* com.banque.service.impl.*BanqueImpl.*(..))" />
+		<aop:advisor advice-ref="txAdviceTestFront" pointcut-ref="banqueServiceMethods" />
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="banqueUserServiceMethods"
+			expression="execution(* com.banque.service.impl.*UserServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdviceTestFront" pointcut-ref="banqueUserServiceMethods" />
+	</aop:config>
+
+	<!--  EH CACHE + SPRING -->
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+	</bean>
+
+	<bean id="cacheProviderFacade" class="org.springmodules.cache.provider.ehcache.EhCacheFacade">
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+
+	<!--  Uniquement pour la lecture cache. -->
+	<bean id="cachingAttributeSource"
+		class="org.springmodules.cache.annotations.AnnotationCachingAttributeSource">
+	</bean>
+
+	<bean id="autoproxy"
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+
+	<bean id="cachingInterceptor"
+		class="org.springmodules.cache.interceptor.caching.MetadataCachingInterceptor">
+		<property name="cacheProviderFacade" ref="cacheProviderFacade" />
+		<property name="cachingAttributeSource" ref="cachingAttributeSource" />
+		<property name="cachingModels">
+			<props>
+				<prop key="userCache">cacheName=userCacheParam</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="cachingAttributeSourceAdvisor"
+		class="org.springmodules.cache.interceptor.caching.CachingAttributeSourceAdvisor">
+		<constructor-arg ref="cachingInterceptor" />
+	</bean>
+
+
+	<!--  Uniquement pour l'ecriture cache. -->
+	<bean id="flushingAttributeSource"
+		class="org.springmodules.cache.annotations.AnnotationFlushingAttributeSource">
+	</bean>
+
+	<bean id="flushingInterceptor"
+		class="org.springmodules.cache.interceptor.flush.MetadataFlushingInterceptor">
+		<property name="cacheProviderFacade" ref="cacheProviderFacade" />
+		<property name="flushingAttributeSource" ref="flushingAttributeSource" />
+		<property name="flushingModels">
+			<props>
+				<prop key="userCache">cacheNames=userCacheParam</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="flushingAttributeSourceAdvisor"
+		class="org.springmodules.cache.interceptor.flush.FlushingAttributeSourceAdvisor">
+		<constructor-arg ref="flushingInterceptor" />
+	</bean>
+
+
+
+
+
+
+</beans>	  	

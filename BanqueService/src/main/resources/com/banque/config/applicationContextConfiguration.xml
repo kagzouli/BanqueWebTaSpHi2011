@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ehcache="http://www.springmodules.org/schema/ehcache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springmodules.org/schema/ehcache http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd">
+	<!--  -->
+	
+   <bean id="configurationSpringApplicationContext" class="com.banque.common.SpringApplicationContext" lazy-init="false"/>	
+	
+   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+		<property name="propertiesArray">
+			<list>
+				<bean factory-bean="configurationSource" factory-method="getAsProperties" />
+			</list>
+		</property>
+	</bean>
+	
+   <bean id="configurationSource" class="com.banque.common.ApacheCommonsConfigurationSource" scope="singleton"
+		lazy-init="false" init-method="init">
+		<property name="config" ref="configurationGetter" />
+	</bean>
+	
+   <bean id="configurationGetter" factory-bean="defaultConfigurationBuilder" factory-method="getConfiguration" />
+   
+	   
+   <bean id="defaultConfigurationBuilder" class="com.banque.common.DefaultConfigurationBuilder">
+		<constructor-arg type="java.io.File" value="file:config.xml" />
+		<property name="reloadingStrategy" ref="reloadingStrategy" />
+   </bean>
+   
+   <bean id="reloadingStrategy" class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy" />
+</beans>

@@ -1,0 +1,238 @@
+*{margin:0; padding:0;}
+
+body {
+font-family: Verdana, Arial, "Trebuchet MS", Sans-Serif, Georgia, Courier, "Times New Roman", Serif;
+font-size: 11px; 
+background: #f7f7f7;
+color: #000; 
+margin:0; 
+padding:0;
+line-height: 135%;
+}
+
+a { color: #0C9C09; text-decoration: none; }
+a:hover { text-decoration: none; color : #111; }
+
+img{ border: none; padding: 6px; } 
+img a{border:none;} 
+
+ul { list-style-type: none; }
+
+#page {
+	width: 800px;
+	margin: 20px auto;
+}
+
+#header { 
+height: 90px;
+background: #f7f7f7 url(images/header.jpg) no-repeat;
+text-transform: uppercase;
+}
+#header h1 {
+font-size: 23px;
+font-weight: 600;
+padding: 34px 0 0 30px;
+}
+#header h1 a {
+color: #0C9C09;
+}
+#header h1 a:hover {
+color: #111;
+}
+#header h2 {
+color: #f777;
+font-size: 12px;
+font-weight: 100;
+padding: 5px 0 0 32px;
+}
+
+#menu {
+background: #f7f7f7 url(images/menu.jpg) no-repeat;
+height: 30px;
+line-height: 30px;
+}
+
+#menu ul {
+list-style-type: none;
+margin: 0;
+padding-left: 20px;
+}
+#menu ul li {
+display: block;
+float: left;
+}
+#menu ul li a {
+display: block;
+padding: 0 10px 0 10px;
+text-decoration: none;
+color: #fff;
+font-size: 11px;
+font-weight: 600;
+}
+#menu ul li a:hover {
+color: #111;
+}
+
+#wrapper {
+padding: 0 0 0 20px;
+background: #f7f7f7 url(images/content.jpg) repeat-y;
+}
+
+#content {
+float: left;
+width: 500px;
+padding-top: 20px;
+padding-bottom: 20px;
+}
+
+#sidebar {
+float: right;
+width: 120px;
+margin-right: 10px;
+margin-top: 15px;	
+}
+
+#footer {
+background: #f7f7f7 url(images/footer.jpg) no-repeat;
+height: 50px;
+line-height: 50px;
+font-weight: 100;
+font-size: 11px;
+text-align: center;
+color #fff;	
+}
+#footer p { color: #fff; }
+#footer a { color: #fff; text-decoration: none; }
+#footer a:hover { text-decoration: underline; }
+
+
+#content h2 {
+font-weight: 100;
+letter-spacing: -1px;
+font-size: 20px;
+margin: 20px 0 4px; padding: 0 0 3px; 
+color: #0C9C09;
+}
+#content ul {
+color: #555555;
+padding: 10px 30px;
+}
+#content ul li {
+list-style-type: square;
+}
+
+#sidebar ul {
+list-style-type: none; 
+}
+
+#sidebar h2 {
+background: #0C9C09 url(images/sidebarh2.jpg) no-repeat;
+font-family:"Trebuchet MS", Arial, Sans-serif; 
+height: 30px;
+line-height: 30px;
+font-weight: 100;
+font-size: 12px;
+margin: 10px 0 5px 0; padding: 0 0 0 10px; 
+color: #fff;
+text-transform: uppercase;
+}
+
+#sidebar ul {
+padding: 5px 0 5px 0;
+}
+
+#sidebar ul li {
+background: url(images/bullet.png) no-repeat center left;
+padding: 2px 0 2px 15px;
+}
+#sidebar ul li a { font-size: 11px;}
+
+#sidebar ul {
+padding-left: 7px;
+}
+
+span.labelfield {
+	color: 0000FF;
+	font-family: Arial;
+	font-size: 11pt;
+}
+
+div.messageerreur {
+	color: red;
+	margin-left: 390px;
+}
+span.titlepage{
+  font-weight:bold;
+  font-size: 14px;
+  text-align: center;
+  color : #0CAC09;
+}
+
+table.t-data-grid{ 
+  width:500px; 
+}
+
+TABLE.t-data-grid THEAD TR {
+    color: white;
+    background-color : #0CAC09;
+}
+
+DIV.t-data-grid-pager SPAN.current {
+    color: white;
+    background-color : #0CAC09;
+}
+
+th.login t-first{
+  color : #0CAC09;
+}
+
+span.logintitre {
+	color: #0000FF;
+	font-family: Arial;
+	font-size: 18pt;
+	font-style: italic;
+	margin-left: 430px;
+}
+
+table.tablelogin {
+	margin-right: 200px;
+	margin-left: 370px;
+	margin-top: 70 px;
+
+	border-top-color: #0C9C09;
+	border-top-style: solid;
+	border-top-width: 1 px;
+	border-left-color: #0C9C09;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: #0C9C09;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-color: #0C9C09;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+
+	border-style : 5px;
+
+}
+
+td.tdmessagelogin {
+	
+}
+
+.styleButton {
+	color: yellow;
+	background-color: #0C9C09;
+}
+
+
+div.emplacementlogin{
+  margin-right: 350px;
+  margin-top:  130px;	
+  }
+
+
+
+
+
+

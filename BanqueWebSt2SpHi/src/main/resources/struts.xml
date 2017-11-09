@@ -1,0 +1,102 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    
+    <constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.convention.package.locators" value="com.banque.action.banque,com.banque.action.user" />
+	<constant name="struts.convention.action.suffix" value="Action" />
+	<constant name="struts.convention.action.mapAllMatches" value="true" />
+    
+
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	
+	<constant name="struts.custom.i18n.resources" value="message"  />
+	<constant name="struts.i18n.reload" value="true" />
+    <constant name="struts.configuration.xml.reload" value="true" />
+
+
+   	
+	<package name="banqueDefault" extends="struts-default" namespace="/">
+	
+	   <result-types>
+         <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+       </result-types>
+       
+	   <interceptors>
+          <interceptor-stack name="banqueWebStack">
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="profiling"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="params">
+                  <param name="excludeParams">dojo\..*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="jsonValidationWorkflowStack">
+					<param name="params.excludeParams">struts\..*</param>
+				</interceptor-ref> 
+
+            </interceptor-stack>
+       </interceptors>
+
+       <action name="IndexAction" class="com.banque.action.common.IndexAction" method="init"> 
+          <result name="success" type="tiles">/index.page</result>
+          <result name="error">/jsp/error.jsp</result>
+       </action>
+ 
+       <action name="LogoutAction" class="com.banque.action.common.LogoutAction" method="logout"> 
+          <result name="success" type="redirectAction">IndexAction</result>
+          <result name="error">/jsp/error.jsp</result>
+       </action>
+         
+    </package>
+    
+    <package name="banque" extends="banqueDefault" namespace="/banque">  
+
+       <action name="InitCrediter" class="com.banque.action.banque.CrediterAction" method="init"> 
+          <result name="success" type="tiles">/crediter.page</result>
+          <result name="error">/jsp/error.jsp</result>
+       </action>
+
+       <action name="CrediterAction" class="com.banque.action.banque.CrediterAction" method="crediter"> 
+          <interceptor-ref name="banqueWebStack"/>
+          <result name="input" type="tiles">/crediter.page</result>
+          <result name="success" type="redirectAction">
+		    <param name="actionName">ViewEtatCompteAction</param>
+    		<param name="login">${login}</param>
+  		</result>
+
+          <result name="error">/jsp/error.jsp</result>
+       </action>
+       
+       <action name="ViewEtatCompteAction" class="com.banque.action.banque.ViewEtatCompteAction" method="view"> 
+          <interceptor-ref name="banqueWebStack"/>
+          <result name="input">/jsp/error.jsp</result>
+          <result name="success" type="tiles">/viewetatcompte.page</result>
+          <result name="error">/jsp/error.jsp</result>
+       </action>
+    
+    
+    </package>
+
+    
+    
+</struts>

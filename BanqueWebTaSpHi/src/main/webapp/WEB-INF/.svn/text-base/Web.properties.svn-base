@@ -1,0 +1,40 @@
+#Home page
+page.encoding=UTF-8
+text.credit.account=Credit an account
+text.debit.account=Debit an account
+text.transfert.account=Transfer between accounts
+text.search.account=Search accounts
+text.create.user=Create user
+text.performance.user=Performance user
+text.parameters=Settings
+text.logout=Logout
+
+#Common
+text.back=Back
+
+# Page
+login.field=Login
+operation.field=Operation
+amount.field=Amount
+submit.field=Submit
+role.field=Role
+page.edit=Edit
+
+#Confirmation
+confirmlabel.value=Are you sure?
+
+# Page parametre
+codeparametre.field=Code
+labelparametre.field=Label
+descriptionparametre.field=Description
+valeurparametre.field=Value
+
+#Operation compte
+dateOperation.field=Operation date
+libelleoperation.field=Operation
+debit.field=Debit
+credit.field=Credit
+montanttotal.field=Amount
+
+loginemetter.field=Emetter transfert login
+loginreceiver.field=Receiver transfert login

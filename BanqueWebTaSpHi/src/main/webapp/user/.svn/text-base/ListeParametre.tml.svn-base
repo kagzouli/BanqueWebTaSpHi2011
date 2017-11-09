@@ -1,0 +1,24 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+ 
+  <center><span class="titlepage">${message:text.page}</span></center>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <t:grid source="listParametre" row="parametre" model="model" rowsPerPage="5">
+         <t:parameter name="modificationCell">
+          <center>
+          <t:actionlink t:id="modification" context="parametre.code"><img src="${imageModification}" border="0" /></t:actionlink>
+          </center>
+         </t:parameter>
+  
+         <t:parameter name="suppressionCell">
+          <center>
+          <t:actionlink t:id="suppression" t:mixins="confirm" context="parametre.code"><img src="${imageSuppression}" border="0" /></t:actionlink>
+          </center>
+         </t:parameter>
+  
+       </t:grid>
+ 
+         
+</t:layout>

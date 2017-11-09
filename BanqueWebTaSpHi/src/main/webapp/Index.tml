@@ -1,0 +1,17 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+
+      <ul>
+       <t:if test="roleUser">
+        <li><t:pagelink page="banque/crediter">${message:text.credit.account}</t:pagelink></li>
+        <li><t:pagelink page="banque/debiter">${message:text.debit.account}</t:pagelink></li>
+        <li><t:pagelink page="banque/virement">${message:text.transfert.account}</t:pagelink></li> 
+        <li><t:pagelink page="banque/rechercheListeCompte">${message:text.search.account}</t:pagelink></li> 
+      </t:if>
+      <t:if test="roleAdmin">
+        <li><t:pagelink page="user/creation">${message:text.create.user}</t:pagelink></li> 
+        <li><t:pagelink page="user/performanceUser">${message:text.performance.user}</t:pagelink></li> 
+        <li><t:pagelink page="user/listeParametre">${message:text.parameters}</t:pagelink></li> 
+      </t:if>
+      
+      </ul>
+</t:layout>

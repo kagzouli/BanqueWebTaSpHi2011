@@ -1,0 +1,39 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+ 
+  <center><span class="titlepage">${message:text.page}</span></center>
+  <br/>
+  <br/>
+  <t:form t:id="modifparam_form">
+	<t:errors />
+	<table cellspacing="15">
+	  <colgroup>
+        <col width="200" />
+        <col width="50" />
+        <col width="300" />
+      </colgroup>
+	 <tr>
+		<td> <span class="labelfield"><t:label for="code"> ${message:codeparametre.field}</t:label></span></td>
+		<td>:</td>
+		<td>${parametreForm.code}<t:textfield t:id="code" t:value="parametreForm.code" style="display:none"/> </td>
+   </tr>
+	 <tr>
+		<td> <span class="labelfield"><t:label for="label"> ${message:labelparametre.field}</t:label></span></td>
+		<td>:</td>
+		<td><t:textfield t:id="label" t:value="parametreForm.label" /></td>
+	 </tr>
+	 <tr>
+		<td> <span class="labelfield"><t:label for="description"> ${message:descriptionparametre.field}</t:label></span></td>
+		<td>:</td>
+		<td><t:textfield t:id="description" t:value="parametreForm.description" /></td>
+	 </tr>
+   <tr>
+		<td> <span class="labelfield"><t:label for="value"> ${message:valeurparametre.field}</t:label></span></td>
+		<td>:</td>
+		<td><t:textfield t:id="value" t:value="parametreForm.valeur" /></td>
+	 </tr>
+
+	 <tr>
+	   <td colspan="3"><center><t:submit t:id="submit" value="${message:submit.field}" /></center></td>
+	</tr>
+	</table>
+  </t:form></t:layout>

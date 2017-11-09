@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/depotsvn/BanqueWebTaSpHi/!svn/ver/26/src/main/webapp/banque
+END
+RechercheListeCompte.tml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/webapp/banque/RechercheListeCompte.tml
+END
+EtatCompte.tml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/webapp/banque/EtatCompte.tml
+END
+Virement.tml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/depotsvn/BanqueWebTaSpHi/!svn/ver/26/src/main/webapp/banque/Virement.tml
+END
+Crediter.tml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/depotsvn/BanqueWebTaSpHi/!svn/ver/25/src/main/webapp/banque/Crediter.tml
+END
+Debiter.tml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/depotsvn/BanqueWebTaSpHi/!svn/ver/25/src/main/webapp/banque/Debiter.tml
+END

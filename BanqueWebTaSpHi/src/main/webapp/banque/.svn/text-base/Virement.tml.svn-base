@@ -1,0 +1,41 @@
+ <t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+ 	
+ 	<center><span class="titlepage">${message:text.page}</span></center>
+    <br/>
+    <br/>
+	
+	<t:form t:id="virement_form">
+	  <t:errors />
+	  <table cellspacing="15">
+		<colgroup>
+        	<col width="200" />
+        	<col width="50" />
+        	<col width="200" />
+    	 </colgroup>
+		
+		<tr>
+			<td> <span class="labelfield"><t:label for="loginEmetteur">${message:loginemetter.field}</t:label></span></td>
+			<td>:</td>
+			<td><t:textfield t:id="loginEmetteur" t:value="operationCompteForm.loginEmetteur" /></td>
+		</tr>
+		<tr>
+			<td> <span class="labelfield"><t:label for="loginReceveur">${message:loginreceiver.field}</t:label></span></td>
+			<td>:</td>
+			<td><t:textfield t:id="loginReceveur" t:value="operationCompteForm.loginReceveur" /></td>
+		</tr>
+		<tr>
+			<td> <span class="labelfield"><t:label for="operation"> ${message:operation.field}</t:label></span></td>
+			<td>:</td>
+			<td><t:textfield t:id="operation" t:value="operationCompteForm.libelleOperation" /></td>
+		</tr>			
+		<tr>
+			<td> <span class="labelfield"><t:label for="montant">${message:amount.field}</t:label></span></td>
+			<td>:</td>
+			<td><t:textfield t:id="montant" t:value="operationCompteForm.montant" /></td>
+		</tr>
+		<tr>
+		 <td colspan="3"><center><t:submit t:id="submit" value="${message:submit.field}" /></center></td>
+		</tr>
+	  </table>
+    </t:form>
+</t:layout>

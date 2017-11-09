@@ -1,0 +1,53 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+    <center><span class="titlepage">${message:text.page}</span></center>
+    
+    <br/>
+    <br/>
+    <span>
+  	  <t:form t:id="recherchecompte_form" zone="zoneRechercheCompte">
+		<fieldset>
+		
+		<t:errors />
+		<table cellspacing="15">
+		  <colgroup>
+        	<col width="200" />
+        	<col width="50" />
+        	<col width="200" />
+    	  </colgroup>
+		  <tr>
+			<td> <span class="labelfield"><t:label for="login"> ${message:login.field}</t:label></span></td>
+			<td>:</td>
+			<td><t:textfield t:id="login" t:value="loginValue" /></td>
+		  </tr>
+		<tr>
+		   <td> <span class="labelfield"><t:label for="montantMin">${message:amountmin.field}</t:label></span></td>
+		   <td>:</td>
+		   <td><t:textfield t:id="montantMin" t:value="montantMinValue" /></td>
+		</tr>
+		<tr>
+		   <td> <span class="labelfield"><t:label for="montantMax">${message:amountmax.field}</t:label></span></td>
+		   <td>:</td>
+		   <td><t:textfield t:id="montantMax" t:value="montantMaxValue" /></td>
+		</tr>
+		<tr>
+		 <td colspan="3"><center><t:submit t:id="submit" value="${message:submit.field}" /></center></td>
+		</tr>
+		</table>
+		</fieldset>
+  	</t:form>
+    
+    <br/>
+    <br/>
+    <br/>
+    
+    <span width="700">
+     <t:zone  t:id="zoneRechercheCompte">
+     <t:grid source="listEtatCompte" row="etatCompte" model="model" rowsPerPage="5">
+       <t:parameter name="editCell">
+          <t:actionlink t:id="edit" context="etatCompte.login"><img src="${imageOeil}" border="0" /></t:actionlink>
+       </t:parameter>
+     </t:grid>
+     </t:zone>
+    </span>
+   </span>
+</t:layout>

@@ -1,0 +1,36 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+ 
+  <center><span class="titlepage">${message:text.page}</span></center>
+    <br/>
+    <br/>
+ 
+  <t:form t:id="createuser_form">
+	<t:errors />
+	<table cellspacing="15">
+	  <colgroup>
+        <col width="200" />
+        <col width="50" />
+        <col width="200" />
+      </colgroup>
+	  <tr>
+		<td> <span class="labelfield"><t:label for="login"> Login</t:label></span></td>
+		<td>:</td>
+		<td><t:textfield t:id="login" value="loginValue" /></td>
+	 </tr>
+	 <tr>
+		<td> <span class="labelfield"><t:label for="password"> Password</t:label></span></td>
+		<td>:</td>
+		<td><t:textfield t:id="password" value="passwordValue" /></td>
+	 </tr>
+	 
+	 <tr>
+		<td> <span class="labelfield"> <t:label for="role">Role</t:label></span></td>
+		<td>:</td>
+		<td><t:select t:id="role" t:model="modelRoles" t:value="roleChoose" t:encoder="modelRoles" /></td>		   
+     </tr>
+	 <tr>
+	   <td colspan="3"><center><t:submit t:id="submit" value="${message:submit.field}" /></center></td>
+	</tr>
+	</table>
+  </t:form>
+</t:layout>

@@ -1,0 +1,37 @@
+10
+
+dir
+98
+http://188.165.47.58/depotsvn/BanqueWebTaSpHi/src/main/resources/com/banque/java
+http://188.165.47.58/depotsvn/BanqueWebTaSpHi
+
+
+
+2010-12-07T22:56:01.811117Z
+95
+karim
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ef33b8dd-246c-4f1d-8612-ce89f17dc010
+
+components
+dir
+
+mixins
+dir
+
+pages
+dir
+

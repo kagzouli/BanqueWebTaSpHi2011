@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/depotsvn/BanqueWebTaSpHi/!svn/ver/97/src/main/webapp/WEB-INF
+END
+web-application-context.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/depotsvn/BanqueWebTaSpHi/!svn/ver/3/src/main/webapp/WEB-INF/web-application-context.xml
+END
+Web_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/depotsvn/BanqueWebTaSpHi/!svn/ver/97/src/main/webapp/WEB-INF/Web_fr.properties
+END
+Web.properties
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/depotsvn/BanqueWebTaSpHi/!svn/ver/97/src/main/webapp/WEB-INF/Web.properties
+END
+Web_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/depotsvn/BanqueWebTaSpHi/!svn/ver/97/src/main/webapp/WEB-INF/Web_en.properties
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/depotsvn/BanqueWebTaSpHi/!svn/ver/22/src/main/webapp/WEB-INF/web.xml
+END

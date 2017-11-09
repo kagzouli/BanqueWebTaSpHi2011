@@ -1,0 +1,31 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+    <center><span class="titlepage">${message:text.page}</span></center>
+    <br/>
+    <br/>
+  
+    <table cellspacing="15">
+	  <colgroup>
+        <col width="200" />
+        <col width="50" />
+        <col width="200" />
+      </colgroup>
+   	  <tr>
+		<td> <span class="labelfield">${message:login.field}</span></td>
+		<td>:</td>
+		<td>${etatCompteForm.login}</td>
+	  </tr>
+	  <tr>
+		<td> <span class="labelfield">${message:amount.field}</span></td>
+		<td>:</td>
+		<td>${etatCompteForm.montant}</td>
+	  </tr>
+	  <tr>
+		<td> <span class="labelfield">${message:sessiondata.field}</span></td>
+		<td>:</td>
+		<td>${indexPage.sessionData}</td>
+	  </tr>
+	  <tr>
+		 <td colspan="3"><center><t:pagelink page="index">${message:text.back}</t:pagelink></center></td>
+	  </tr> 
+   </table>
+</t:layout>

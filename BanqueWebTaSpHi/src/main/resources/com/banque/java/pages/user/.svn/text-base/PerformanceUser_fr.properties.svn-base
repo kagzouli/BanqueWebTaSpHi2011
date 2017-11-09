@@ -1,0 +1,11 @@
+text.page=Performance utilisateur
+total.amount.label=Total des montants
+solde.crediteur.label=Solde cr\u00E9diteur au 
+
+typeaffichage.codegraph.label=Vue graphique
+typeaffichage.codetext.label=Vue textuelle
+typeaffichage.field=Type affichage
+
+chart.xlabel=op\u00E9ration
+chart.ylabel=Montant Total
+chart.title=Evolution du montant total en fonction de l'op\u00E9ration

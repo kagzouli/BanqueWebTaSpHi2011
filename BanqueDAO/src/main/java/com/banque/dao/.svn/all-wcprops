@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/depotsvn/BanqueDAO/!svn/ver/40/src/main/java/com/banque/dao
+END
+IUserDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/depotsvn/BanqueDAO/!svn/ver/17/src/main/java/com/banque/dao/IUserDao.java
+END
+IParametreDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/depotsvn/BanqueDAO/!svn/ver/28/src/main/java/com/banque/dao/IParametreDAO.java
+END
+IBanqueDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/depotsvn/BanqueDAO/!svn/ver/21/src/main/java/com/banque/dao/IBanqueDAO.java
+END

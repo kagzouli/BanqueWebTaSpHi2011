@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/depotsvn/BanqueService/!svn/ver/17/src/main/resources
+END
+log4j.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/depotsvn/BanqueService/!svn/ver/1/src/main/resources/log4j.xml
+END
+test-configuration.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/depotsvn/BanqueService/!svn/ver/17/src/main/resources/test-configuration.xml
+END
+ehcache.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/depotsvn/BanqueService/!svn/ver/1/src/main/resources/ehcache.xml
+END
+config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/depotsvn/BanqueService/!svn/ver/1/src/main/resources/config.xml
+END

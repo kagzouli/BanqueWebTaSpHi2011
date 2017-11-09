@@ -1,0 +1,48 @@
+<t:layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">	
+    <center><span class="titlepage">${message:text.page}</span></center>
+    
+    <br/>
+    <br/>
+    
+    <span>
+  	  <t:form t:id="performanceuser_form" zone="zoneRechercheUser">		
+		<table border="0">
+		  <colgroup>
+        	<col width="100" />
+        	<col width="100" />
+        	<col width="200" />
+        	<col width="150" />
+        	<col width="100" />	
+    	  </colgroup>
+		  <tr>
+			<td> <span class="labelfield"><t:label for="user"> ${message:login.field}</t:label></span></td>
+			<td><t:select  onchange="document.getElementById('performanceuser_form').submit()" t:id="user" t:model="modelUsers" t:value="userChoose" t:encoder="modelUsers" /></td>
+		  	<td></td>
+		  	<td><span class="labelfield"><t:label for="typeAffichage"> ${message:typeaffichage.field}</t:label></span></td>
+		    <td><t:select  onchange="document.getElementById('performanceuser_form').submit()" t:id="typeAffichage" t:model="modelTypeAffichage" t:value="typeAffichageChoose" t:encoder="modelTypeAffichage" /></td>
+		  </tr>
+		</table>
+  	  </t:form>
+  	</span>
+  	
+   <br/>
+  	
+   <span width="700">
+     	<t:zone  t:id="zoneRechercheUser">
+     	  
+     	  <t:if test="isViewText">
+     	      <br/>
+  			  <br/>
+     	      <t:grid source="listOperationCompte" row="operationCompte" model="model" rowsPerPage="8" />
+     	  </t:if>
+     	  
+     	  <t:if test="isViewGraph">
+     	     <t:chart width="700" height="270" chart="lineChart"/>
+     	  </t:if>
+     	</t:zone>
+    </span>
+  	
+  	
+</t:layout>
+		
+    

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque
+END
+RechercheListeCompte_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/RechercheListeCompte_fr.properties
+END
+RechercheListeCompte_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/RechercheListeCompte_en.properties
+END
+Debiter.properties
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Debiter.properties
+END
+Debiter_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Debiter_fr.properties
+END
+Debiter_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Debiter_en.properties
+END
+RechercheListeCompte.properties
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/RechercheListeCompte.properties
+END
+EtatCompte_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/EtatCompte_fr.properties
+END
+Virement_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Virement_fr.properties
+END
+EtatCompte_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/EtatCompte_en.properties
+END
+Crediter.properties
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Crediter.properties
+END
+Crediter_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Crediter_fr.properties
+END
+Virement.properties
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Virement.properties
+END
+Virement_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Virement_en.properties
+END
+EtatCompte.properties
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/EtatCompte.properties
+END
+Crediter_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/depotsvn/BanqueWebTaSpHi/!svn/ver/1/src/main/resources/com/banque/java/pages/banque/Crediter_en.properties
+END

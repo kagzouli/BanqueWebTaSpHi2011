@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<!-- ============================== -->
+	<!-- Append messages to the console -->
+	<!-- ============================== -->
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="FILEGLOBAL" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="D:/logs/test-web-info.log" />
+		<param name="MaxFileSize" value="10240KB" />
+		<!-- Keep one backup file -->
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%t] %5p %c{1}:{%F:%L} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="FILEERROR" class="org.apache.log4j.RollingFileAppender">
+		<param name="Threshold" value="ERROR" />
+		<param name="file" value="D:/logs/test-web-error.log" />
+		<param name="MaxFileSize" value="10240KB" />
+		<!-- Keep one backup file -->
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%t] %5p %c{1}:{%F:%L} - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- ================ -->
+	<!-- Limit categories -->
+	<!-- ================ -->
+
+	<category name="org.springmodules">
+		<priority value="WARN" />
+	</category>
+
+	<category name="org.springframework">
+		<priority value="WARN" />
+	</category>
+
+	<!--
+		<category name="org.hibernate"> <priority value="INFO" /> </category>
+	-->
+
+	<category name="org.hibernate">
+		<priority value="WARN" />
+	</category>
+	
+	<category name="com.banque">
+		<priority value="INFO" />
+	</category>
+
+	<!--
+		show JDBC parameters <category name="org.hibernate.type"> <priority
+		value="TRACE" /> </category>
+	-->
+
+	<!-- ======================= -->
+	<!-- Setup the Root category -->
+	<!-- ======================= -->
+
+	<root>
+		<!--appender-ref ref="CONSOLE"/-->
+		<priority value="WARN" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILEGLOBAL" />
+		<appender-ref ref="FILEERROR" />
+	</root>
+
+</log4j:configuration>
+ 
