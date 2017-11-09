@@ -196,10 +196,6 @@
 	        <type>jar</type>
 		</dependency>
 
-		<dependency>
-            <groupId>jcommon</groupId>
-            <artifactId>jcommon</artifactId>
-        </dependency>
 		
 		<dependency>
             <groupId>jfree</groupId>
@@ -208,12 +204,14 @@
 
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>
-			<artifactId>banqueDAO</artifactId>
+			<artifactId>BanqueDAO</artifactId>
+			<version>${current.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>
-			<artifactId>banqueService</artifactId>
+			<artifactId>BanqueService</artifactId>
+			<version>${current.version}</version>
 		</dependency>
 
 	</dependencies>

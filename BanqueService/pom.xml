@@ -131,7 +131,8 @@
 		
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>
-			<artifactId>banqueDAO</artifactId>
+			<artifactId>BanqueDAO</artifactId>
+			<version>${current.version}</version>
 		</dependency>
 		
 
