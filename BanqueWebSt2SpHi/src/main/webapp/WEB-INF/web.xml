@@ -15,7 +15,6 @@
 	 </listener>
 	 
 	 <listener>
-		<display-name>Spring Web Context Loader Listener</display-name>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	

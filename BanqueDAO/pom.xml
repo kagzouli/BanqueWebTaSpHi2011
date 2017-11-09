@@ -14,14 +14,6 @@
 	</parent>
 	<dependencies>
 		<dependency>
-			<groupId>ant</groupId>
-			<artifactId>ant-jsch</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ant</groupId>
-			<artifactId>ant</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>

@@ -28,6 +28,7 @@ target/
 .recommenders/
 .metadata/
 bin/
+Servers/
 
 # Logs and databases #
 
