@@ -1,0 +1,10 @@
+<Context path="/BanqueWebTaSpHi" docBase="BanqueWebTaSpHi" crossContext="true" antiJARLocking="true"> 
+
+        <!-- Sybase ASE default datasource DEV --> 
+        
+        <Resource name="jdbc/banque" auth="Container" type="javax.sql.DataSource" 
+                          maxActive="20" maxIdle="-1" maxWait="10000" 
+                          username="sa" password="" 
+                          driverClassName="org.h2.Driver" 
+                          url="jdbc:h2:~/data/banque;INIT=create schema if not exists users1\\;RUNSCRIPT FROM 'classpath:db-data-h2-banque.sql" /> 
+</Context> 

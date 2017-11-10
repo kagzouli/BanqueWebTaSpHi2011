@@ -11,7 +11,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springmodules.cache.annotations.CacheFlush;
 
 import com.banque.dao.IBanqueDAO;
 import com.banque.dao.IParametreDAO;
@@ -23,7 +22,6 @@ import com.banque.modele.Role;
 import com.banque.modele.User;
 import com.banque.service.IUserService;
 import com.banque.service.exception.LoginDejaExistantException;
-import com.banque.service.exception.ParametreNotFoundException;
 import com.banque.service.exception.ParametreNotFoundException;
 import com.banque.service.exception.TechnicalException;
 
@@ -60,7 +58,6 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#createUser(com.banque.modele.User, java.lang.String)
 	 */
-	@CacheFlush(modelId = "userCache")
 	public void createUser(final User newUser, final String passwordNotCrypt) throws LoginDejaExistantException, TechnicalException {
 		final String login = newUser.getLogin();
 
