@@ -184,9 +184,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>jboss</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-	        <type>jar</type>
 		</dependency>
 
 		<dependency>
@@ -236,15 +235,7 @@
 		    <groupId>org.apache.struts.xwork</groupId>
     		<artifactId>xwork-core</artifactId>
   		</dependency>
-  		
-
-		<dependency>
-			<groupId>banque</groupId>
-			<artifactId>BanqueDAO</artifactId>
-			<version>1.0</version>
-	     <type>jar</type>
-		</dependency>
-		
+  				
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>
 			<artifactId>BanqueDAO</artifactId>

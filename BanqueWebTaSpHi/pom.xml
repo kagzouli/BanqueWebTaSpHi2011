@@ -183,9 +183,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>jboss</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-	        <type>jar</type>
 		</dependency>
 
 		

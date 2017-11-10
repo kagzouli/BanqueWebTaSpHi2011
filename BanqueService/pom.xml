@@ -15,7 +15,7 @@
 	<dependencies>
 	
 		<dependency>
-			<groupId>jboss</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
 		

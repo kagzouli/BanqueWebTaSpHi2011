@@ -13,11 +13,12 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<dependencies>
+
 		<dependency>
-			<groupId>jboss</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
