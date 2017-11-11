@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.IncludeStylesheet;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Persist;
@@ -23,7 +23,7 @@ import com.banque.modele.EtatCompte;
 import com.banque.service.IBanque;
 import com.banque.service.exception.TechnicalException;
 
-@IncludeStylesheet("context:style.css")
+@Import(stylesheet="context:style.css")
 public class RechercheListeCompte {
 	
 	@Component(id = "recherchecompte_form")

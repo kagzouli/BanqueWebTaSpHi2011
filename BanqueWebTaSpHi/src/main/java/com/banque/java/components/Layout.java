@@ -5,7 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tapestry5.Asset;
-import org.apache.tapestry5.annotations.IncludeStylesheet;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Property;
@@ -17,7 +17,7 @@ import org.apache.tapestry5.services.Session;
 
 import com.banque.java.pages.Index;
 
-@IncludeStylesheet("context:style.css")
+@Import(stylesheet="context:style.css")
 public class Layout {
 
 	@Property
@@ -35,11 +35,6 @@ public class Layout {
 	@Inject
 	@Path("context:images/drap_GB.gif")
 	private Asset imageEn;
-	
-	private String roleAdmin;
-	
-	private String roleUser;
-
 
 	@Inject
 	private PersistentLocale localeService;

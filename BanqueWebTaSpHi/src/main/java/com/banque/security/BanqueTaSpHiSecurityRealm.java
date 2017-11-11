@@ -1,29 +1,25 @@
 package com.banque.security;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.securityfilter.realm.SimpleSecurityRealmBase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.HttpRequestHandler;
+import org.springframework.stereotype.Component;
 
+import com.banque.common.SpringApplicationContext;
 import com.banque.modele.Role;
 import com.banque.modele.User;
 import com.banque.service.IUserService;
 import com.banque.service.exception.TechnicalException;
 
+@Component
 public class BanqueTaSpHiSecurityRealm extends SimpleSecurityRealmBase{
 
     /** Logger **/
     private final static Logger LOG = Logger.getLogger(BanqueTaSpHiSecurityRealm.class);
     
-    @Autowired
-    private IUserService userService;
+    private IUserService userService = SpringApplicationContext.getBean(IUserService.class);
+    
 
 
     /**
@@ -38,7 +34,7 @@ public class BanqueTaSpHiSecurityRealm extends SimpleSecurityRealmBase{
      */
     public boolean booleanAuthenticate(String username, String password) {
         try {
-            User user = this.userService.findUserByLoginPassword(username, password);
+            User user = userService.findUserByLoginPassword(username, password);
             return  user != null && !StringUtils.isBlank(user.getLogin());
         }catch (Exception exception) {
             //Erreur technique - On renvoie faux mais il aurait fall
@@ -59,7 +55,7 @@ public class BanqueTaSpHiSecurityRealm extends SimpleSecurityRealmBase{
     public boolean isUserInRole(String username, String roleName) {
         boolean isUserInRole = false;
         try {
-        	final Role role = this.userService.findRoleByLogin(username);
+        	final Role role = userService.findRoleByLogin(username);
         
         	isUserInRole = role != null && StringUtils.equals(roleName, role.getLabel());
         }catch (Exception exception) {

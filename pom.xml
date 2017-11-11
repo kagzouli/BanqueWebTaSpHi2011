@@ -13,6 +13,7 @@
 		<c3p0.version>0.9.1.2</c3p0.version>
 		<current.version>0.0.1-SNAPSHOT</current.version>
 		<spring.version>4.3.12.RELEASE</spring.version>
+		<tapestry.version>5.2.5</tapestry.version>
 	</properties>
 
 	<dependencyManagement>
@@ -42,11 +43,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -168,12 +169,12 @@
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-core</artifactId>
-			<version>5.1.0.5</version>
+			<version>${tapestry.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-ioc</artifactId>
-			<version>5.1.0.5</version>
+			<version>${tapestry.version}</version>
 			<exclusions>
 			  <exclusion>
 			    <groupId>javassist</groupId>
@@ -184,7 +185,7 @@
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-spring</artifactId>
-			<version>5.1.0.5</version>
+			<version>${tapestry.version}</version>
 		</dependency>
 
 		<dependency>
@@ -344,7 +345,7 @@
     		<version>2.2.1</version>
   		</dependency>
 		
-		  <dependency>
+		<dependency>
  		 <groupId>securityfilter</groupId>
   		 <artifactId>securityfilter</artifactId>
   		 <version>2.0</version>
