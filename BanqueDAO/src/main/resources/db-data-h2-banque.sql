@@ -1,4 +1,4 @@
-SET AUTOCOMMIT FALSE;
+BEGIN TRANSACTION; 
 
 DROP TABLE IF EXISTS role;
 CREATE TABLE role(
@@ -62,4 +62,3 @@ INSERT INTO parametre(code,label,description,valeur) values('NBPTMAXCOUGRA','nom
 
 commit;
 
-SET AUTOCOMMIT TRUE;
