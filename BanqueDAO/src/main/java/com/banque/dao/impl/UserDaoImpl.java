@@ -80,6 +80,27 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return user;
 	}
+	
+	@Override
+	public User findUserByLoginPassword(final String login, String password) throws DAOException {
+		User user = null;
+		try {
+			Query query = this.sessionFactory.getCurrentSession().createQuery("FROM User where login=:loginParam and password= :passwordParam");
+			query.setCacheable(true);
+			query.setString("loginParam", login);
+			query.setString("passwordParam", password);
+
+			List<User> listUser = query.list();
+			if ((listUser != null) && (!listUser.isEmpty())) {
+				user = listUser.get(0);
+			}
+		} catch (Exception exception) {
+			LOG.error(exception.getMessage(), exception);
+			throw new DAOException(exception);
+		}
+		return user;
+
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -154,5 +175,24 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return role;
 	}
+	
+	@Override
+	public Role findRoleByLogin(final String login) throws DAOException {
+		User user = null;
+		try {
+			Query query = this.sessionFactory.getCurrentSession().createQuery("FROM User where login=:loginParam");
+			query.setCacheable(true);
+			query.setString("loginParam", login);
 
+			List<User> listUser = query.list();
+			if ((listUser != null) && (!listUser.isEmpty())) {
+				user = listUser.get(0);
+			}
+		} catch (Exception exception) {
+			LOG.error(exception.getMessage(), exception);
+			throw new DAOException(exception);
+		}
+		return user.getRole();
+
+	}
 }

@@ -30,6 +30,15 @@ public interface IUserDao {
 	 * @throws DAOException Erreur technique.<br/>
 	 */
 	User findUserById(final Integer id) throws DAOException;
+	
+	/**
+	 * Methode permettant de recuperer l'utilisateur avec l'id correspondant et le mot de passe crypte.<br/>
+	 * 
+	 * @param login Le login en question.<br/>
+	 * @param passwordCrypted Le mot de passe crypte.<br/>
+	 * @throws DAOException Erreur technique.<br/>
+	 */
+	User findUserByLoginPassword(final String login, final String passwordCrypted) throws DAOException;
 
 	/**
 	 * Methode permettant de creer l'utilisateur en parametre.<br/>
@@ -52,6 +61,16 @@ public interface IUserDao {
 	 * @throws DAOException Erreur technique.<br/>
 	 */
 	Role findRoleByLabel(final String label) throws DAOException;
+	
+	/**
+	 * Methode permettant de recuperer le role a partir du login.<br/>
+	 * 
+	 * @param roleLabel
+	 * @param login
+	 * @return
+	 * @throws DAOException
+	 */
+	Role findRoleByLogin(String login) throws DAOException;
 	
 	/**
 	 * Methode permettant de recuperer le role ayant l'id en parametre.<br/>

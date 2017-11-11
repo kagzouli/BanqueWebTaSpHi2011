@@ -1,6 +1,6 @@
 package com.banque.service.exception;
 
-public class TechnicalException extends Exception{
+public class TechnicalException extends RuntimeException{
 	
 	/**
 	 * Serial UID.<br/>

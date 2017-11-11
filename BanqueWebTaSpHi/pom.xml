@@ -189,6 +189,11 @@
 			<groupId>org.jfree</groupId>
 			<artifactId>jcommon</artifactId>
 		</dependency>
+		
+		<dependency>
+ 			 <groupId>securityfilter</groupId>
+  		 	<artifactId>securityfilter</artifactId>
+		</dependency>
         
 
 		<dependency>

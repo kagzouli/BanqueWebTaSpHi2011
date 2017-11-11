@@ -58,7 +58,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#createUser(com.banque.modele.User, java.lang.String)
 	 */
-	public void createUser(final User newUser, final String passwordNotCrypt) throws LoginDejaExistantException, TechnicalException {
+	public void createUser(final User newUser, final String passwordNotCrypt) throws LoginDejaExistantException {
 		final String login = newUser.getLogin();
 
 		if (!StringUtils.isEmpty(passwordNotCrypt)) {
@@ -96,7 +96,7 @@ public class UserServiceImpl implements IUserService {
 	 * @see com.banque.service.IUserService#findAll()
 	 */
 	// @Cacheable(modelId = "userCache")
-	public List<User> findAll() throws TechnicalException {
+	public List<User> findAll()  {
 		try {
 			return userDao.findAll();
 		} catch (Exception exception) {
@@ -109,7 +109,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#findUserById(java.lang.Integer)
 	 */
-	public User findUserById(final Integer id) throws TechnicalException {
+	public User findUserById(final Integer id) {
 		User user = null;
 		try {
 			user = userDao.findUserById(id);
@@ -120,12 +120,23 @@ public class UserServiceImpl implements IUserService {
 		return user;
 	}
 	
+	public User findUserByLoginPassword(final String login, final String password){
+		User user = null;
+		try {
+			user = userDao.findUserByLoginPassword(login, this.getPasswordCrypted(password, ENCRYPTION_SHA_1));
+		} catch (Exception exception) {
+			LOG.error(exception.getMessage(), exception);
+			throw new TechnicalException(exception);
+		}
+		return user;		
+	}
+	
 /*
  * (non-Javadoc)
  * @see com.banque.service.IUserService#findUserByLogin(java.lang.String)
  */
 	// @Cacheable(modelId = "userCache")
-	public User findUserByLogin(final String login) throws TechnicalException {
+	public User findUserByLogin(final String login) {
 		User user = null;
 		try {
 			user = userDao.findUserByLogin(login);
@@ -140,7 +151,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#findRoles()
 	 */
-	public List<Role> findRoles() throws TechnicalException {
+	public List<Role> findRoles() {
 		try {
 			return userDao.findRoles();
 		} catch (Exception exception) {
@@ -154,7 +165,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#findRoleByLabel(java.lang.String)
 	 */
-	public Role findRoleByLabel(final String label) throws TechnicalException {
+	public Role findRoleByLabel(final String label) {
 		try {
 			return userDao.findRoleByLabel(label);
 		} catch (Exception exception) {
@@ -167,7 +178,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#findRoleById(java.lang.Integer)
 	 */
-	public Role findRoleById(Integer id) throws TechnicalException {
+	public Role findRoleById(Integer id) {
 		Role role = null;
 		try {
 			role = userDao.findRoleById(id);
@@ -177,15 +188,26 @@ public class UserServiceImpl implements IUserService {
 		}
 		return role;
 	}
+	
+	public Role findRoleByLogin(final String login) {
+		Role role = null;
+		try {
+			role = userDao.findRoleByLogin(login);
+		} catch (Exception exception) {
+			LOG.error(exception.getMessage(), exception);
+			throw new TechnicalException(exception);
+		}
+		return role;
+		
+	}
 
 	/**
 	 * Methode permettant de crypter le mot de passe.<br/>
 	 * @param credential Le mot de passe en clair.<br/>
 	 * @param typeEncryption Le type de cryptage (MD5 | SHA1 | TEXT)
 	 * @return Retourne le mot de passe crypte.<br/>
-	 * @throws TechnicalException Erreur technique.<br/>
 	 */
-	protected String getPasswordCrypted(final String credential, final String typeEncryption) throws TechnicalException {
+	protected String getPasswordCrypted(final String credential, final String typeEncryption) {
 
 		String credentialCrypted = credential;
 
@@ -242,7 +264,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#findAllParametres()
 	 */
-	public List<Parametre> findAllParametres() throws TechnicalException {
+	public List<Parametre> findAllParametres() {
 		try {
 			return parametrageDao.findAll();
 		} catch (Exception exception) {
@@ -278,7 +300,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#update(java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)
 	 */
-	public void updateParametre(String code, String label, String description, Integer valeur) throws TechnicalException {
+	public void updateParametre(String code, String label, String description, Integer valeur) {
 		try {
 			Parametre parametre = parametrageDao.findByCode(code);
 			if (parametre == null){
@@ -307,7 +329,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#delete(java.lang.String)
 	 */
-	public void deleteParametre(String code) throws TechnicalException {
+	public void deleteParametre(String code) {
 		try {
 			Parametre parametre = parametrageDao.findByCode(code);
 			if (parametre == null){

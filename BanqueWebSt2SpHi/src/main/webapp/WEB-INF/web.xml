@@ -9,6 +9,23 @@
         <param-name> org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG </param-name>
          <param-value>/WEB-INF/tiles.xml</param-value>
      </context-param>
+	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>/WEB-INF/applicationContext.xml,/WEB-INF/web-application-context.xml</param-value>
+    </context-param>
+
+	 <filter>
+	    <filter-name>struts2</filter-name>
+	    <filter-class>
+	        org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+	    </filter-class>
+     </filter>
+     
+     <filter-mapping>
+	    <filter-name>struts2</filter-name>
+	    <url-pattern>/*</url-pattern>
+	 </filter-mapping> 
+     
   
  	 <listener>
 	     <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
@@ -18,23 +35,9 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<context-param>
-    	<param-name>contextConfigLocation</param-name>
-    	<param-value>/WEB-INF/applicationContext.xml,/WEB-INF/web-application-context.xml</param-value>
-    </context-param>
 	 
  
-	 <filter>
-	    <filter-name>struts2</filter-name>
-	    <filter-class>
-	        org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
-	    </filter-class>
-     </filter>
      
-	 <filter-mapping>
-	    <filter-name>struts2</filter-name>
-	    <url-pattern>/*</url-pattern>
-	 </filter-mapping> 
     
 	<security-constraint>
 		<display-name>Authentification admin</display-name>
@@ -85,26 +88,10 @@
 			<url-pattern>/style.css</url-pattern>
 		</web-resource-collection>
 	</security-constraint>
-	
 
-
-	<login-config>
- 		<auth-method>FORM</auth-method>
- 		<realm-name>JndiDatasourceRealm</realm-name>
- 		<form-login-config>
-   			<form-login-page>/jsp/login.jsp</form-login-page>
-  			<form-error-page>/jsp/login.jsp?authentificate=false</form-error-page>
- 		</form-login-config>
-	</login-config>
-
-	<!-- Rôles utilisés dans l'application -->
-	<security-role>
-		<description>Roles</description>
-		<role-name>admin</role-name>
-		<role-name>user</role-name>
-	</security-role>
-	
-	
+	<welcome-file-list>
+		<welcome-file>/jsp/welcome.jsp</welcome-file>
+	</welcome-file-list>
 	
 	<resource-ref>
 		<description>
@@ -116,7 +103,4 @@
 	</resource-ref> 
 	
 
-	<welcome-file-list>
-		<welcome-file>/jsp/welcome.jsp</welcome-file>
-	</welcome-file-list>
 </web-app>

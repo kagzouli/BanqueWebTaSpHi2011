@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE securityfilter-config PUBLIC
+    "-//SecurityFilter.org//DTD Security Filter Configuration 1.1//EN"
+    "http://www.securityfilter.org/dtd/securityfilter-config_1_1.dtd">
+
+<securityfilter-config>
+
+   <security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Jsp bloqué</web-resource-name>
+			<description>Jsp bloqué</description>
+			<url-pattern>/jsp/page/*</url-pattern>
+			<http-method>HEAD</http-method>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+		</auth-constraint>
+	</security-constraint>
+	
+    <security-constraint>
+		<display-name>Authentification admin</display-name>
+		<!-- Liste des pages protégées -->
+		<web-resource-collection>
+			<web-resource-name>Page sécurisée</web-resource-name>
+			<url-pattern>/kpi/*</url-pattern>
+		</web-resource-collection>
+		<!-- Rôles des utilisateurs ayant le droit d'y accéder -->
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+   <login-config>
+ 	<auth-method>FORM</auth-method>
+ 	<realm-name>JndiDatasourceRealm</realm-name>
+ 	<form-login-config>
+   		<form-login-page>/jsp/login.jsp</form-login-page>
+  		<form-error-page>/jsp/login.jsp?authentificate=false</form-error-page>
+ 	 </form-login-config>
+   </login-config>
+	
+   <security-role>
+	 <description>Roles</description>
+  	 <role-name>admin</role-name>
+   </security-role>
+
+    <realm className="com.bnpp.pf.bird.kpi.authentification.KpiSecurityRealm" />
+
+</securityfilter-config>

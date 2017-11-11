@@ -67,7 +67,7 @@
 
 	<root>
 		<!--appender-ref ref="CONSOLE"/-->
-		<priority value="WARN" />
+		<priority value="INFO" />
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILEGLOBAL" />
 		<appender-ref ref="FILEERROR" />

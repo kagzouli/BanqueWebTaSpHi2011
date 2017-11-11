@@ -40,21 +40,11 @@
 	<!-- Limit categories -->
 	<!-- ================ -->
 
-	<category name="org.springmodules">
-		<priority value="WARN" />
-	</category>
-
-	<category name="org.springframework">
-		<priority value="WARN" />
-	</category>
 
 	<!--
 		<category name="org.hibernate"> <priority value="INFO" /> </category>
 	-->
 
-	<category name="org.hibernate">
-		<priority value="WARN" />
-	</category>
 	
 	<category name="com.banque">
 		<priority value="INFO" />
@@ -71,7 +61,7 @@
 
 	<root>
 		<!--appender-ref ref="CONSOLE"/-->
-		<priority value="WARN" />
+		<priority value="INFO" />
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILEGLOBAL" />
 		<appender-ref ref="FILEERROR" />
