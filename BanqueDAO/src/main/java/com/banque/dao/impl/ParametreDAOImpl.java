@@ -3,12 +3,12 @@ package com.banque.dao.impl;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.banque.dao.IParametreDAO;
@@ -21,14 +21,14 @@ public class ParametreDAOImpl implements IParametreDAO{
 	/** Logger **/
 	public static final Log LOG = LogFactory.getLog(ParametreDAOImpl.class);
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext //(name="CigarUnit",unitName="CigarUnit")
+	private EntityManager entityManager;
+
 	
 	/** Requete recuperant l'ensemble des parametres **/
 	private static final String REQUEST_ALL = "from Parametre";
 
-
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.banque.dao.IParametreDAO#findAll()
@@ -36,8 +36,8 @@ public class ParametreDAOImpl implements IParametreDAO{
 	public List<Parametre> findAll() throws DAOException {
 		List<Parametre> listParametres = Collections.emptyList();	
 		try{
-			Query query = this.sessionFactory.getCurrentSession().createQuery(REQUEST_ALL);
-			listParametres = query.list();			
+			Query query = this.entityManager.createQuery(REQUEST_ALL);
+			listParametres = (List<Parametre>) query.getResultList();			
 		}catch(Exception exception){
 			LOG.error(exception.getMessage(),exception);
 			throw new DAOException(exception);
@@ -53,9 +53,7 @@ public class ParametreDAOImpl implements IParametreDAO{
 	public Parametre findByCode(String code) throws DAOException {
 		Parametre parametre = null;		
 		try{
-			parametre = (Parametre) this.sessionFactory.getCurrentSession().load(Parametre.class, code);
-		}catch(ObjectNotFoundException exception){
-			return null;
+			parametre = this.entityManager.find(Parametre.class, code);
 		}catch(Exception exception){
 			LOG.error(exception.getMessage(),exception);
 			throw new DAOException(exception);
@@ -71,8 +69,8 @@ public class ParametreDAOImpl implements IParametreDAO{
 	public void update(Parametre parametre) throws DAOException {
 
 		try {
-			this.sessionFactory.getCurrentSession().update(parametre);
-			this.sessionFactory.getCurrentSession().flush();
+			this.entityManager.persist(parametre);
+			this.entityManager.flush();
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -88,8 +86,8 @@ public class ParametreDAOImpl implements IParametreDAO{
 	public void delete(Parametre parametre) throws DAOException {
 
 		try {
-			this.sessionFactory.getCurrentSession().delete(parametre);
-			this.sessionFactory.getCurrentSession().flush();
+			Parametre parametreRecover  = this.entityManager.find(Parametre.class, parametre.getCode());
+			entityManager.remove(parametreRecover);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);

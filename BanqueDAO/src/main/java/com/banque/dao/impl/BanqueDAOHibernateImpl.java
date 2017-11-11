@@ -1,32 +1,28 @@
 package com.banque.dao.impl;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Repository;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banque.dao.IBanqueDAO;
 import com.banque.dao.exception.DAOException;
 import com.banque.modele.EtatCompte;
 import com.banque.modele.OperationCompte;
 
-@Repository("banqueDAO")
-public class BanqueDAOImpl implements IBanqueDAO {
+//@Repository("banqueDAO")
+public class BanqueDAOHibernateImpl implements IBanqueDAO {
 
 	/** Logger **/
-	public static final Log LOG = LogFactory.getLog(BanqueDAOImpl.class);
+	public static final Log LOG = LogFactory.getLog(BanqueDAOHibernateImpl.class);
 
 	/** Requete pour recuperer l'etat du compte en fonction du login **/
 	private static final String REQUEST_SELECT_LOGIN = "from EtatCompte where login = :login";
@@ -37,8 +33,8 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	/** Requete pour recuperer les dernieres operations d'un login donne. **/
 	private static final String REQUEST_SELECT_LAST_OPERATION = "from OperationCompte where login = :login order by id desc";
 
-	@PersistenceContext //(name="CigarUnit",unitName="CigarUnit")
-	private EntityManager entityManager;
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	/*
 	 * (non-Javadoc)
@@ -47,8 +43,7 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	public void updateCompte(final EtatCompte etatCompte) throws DAOException {
 
 		try {
-			this.entityManager.persist(etatCompte);
-			this.entityManager.refresh(etatCompte);
+			this.sessionFactory.getCurrentSession().update(etatCompte);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -62,8 +57,8 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	 */
 	public List<EtatCompte> listEtatCompte() throws DAOException {
 		try {
-			Query query = this.entityManager.createQuery(REQUEST_ETAT_COMPTE);
-			List<EtatCompte> listEtatCompte = (List<EtatCompte>) query.getResultList();
+			Query query = this.sessionFactory.getCurrentSession().createQuery(REQUEST_ETAT_COMPTE);
+			List<EtatCompte> listEtatCompte = query.list();
 			return listEtatCompte;
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
@@ -78,18 +73,16 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	 */
 	public EtatCompte getEtatCompte(final String login) throws DAOException {
 		EtatCompte etatCompte = null;
-		try{
-			Query query = this.entityManager.createQuery(REQUEST_SELECT_LOGIN);
+		Query query = this.sessionFactory.getCurrentSession().createQuery(REQUEST_SELECT_LOGIN);
 
-			query.setParameter("login", login);
-			etatCompte = (EtatCompte) query.getSingleResult();
-		}catch(NoResultException noResultException){
-			LOG.warn("No result has been found for getEtatCompte for parameter role login = '" + login +"'");
-		}catch (Exception exception) {
-			LOG.error(exception.getMessage(), exception);
-			throw new DAOException(exception);
+		query.setString("login", login);
+		List<EtatCompte> listEtatCompte = query.list();
+		if (listEtatCompte != null) {
+			if (listEtatCompte.size() > 1) {
+				throw new DAOException("2 comptes ne peuvent pas appartenir aux memes login");
+			}
 		}
-		return etatCompte;
+		return listEtatCompte.get(0);
 	}
 
 	/*
@@ -98,8 +91,7 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	 */
 	public void createEtatCompte(EtatCompte etatCompte) throws DAOException {
 		try {
-			this.entityManager.persist(etatCompte);
-			this.entityManager.refresh(etatCompte);
+			this.sessionFactory.getCurrentSession().save(etatCompte);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -112,40 +104,26 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	 * @see com.banque.dao.IBanqueDAO#listEtatCompte(java.lang.String, java.math.BigDecimal, java.math.BigDecimal)
 	 */
 	public List<EtatCompte> listEtatCompte(String login, BigDecimal montantMin, BigDecimal montantMax) throws DAOException {
-		List<EtatCompte> listEtatCompte = Collections.emptyList();
+
 		try {
-			Map<String, Object> mapParameters = new HashMap<>();
-			
-			StringBuilder jpqlBuilder = new StringBuilder(64);
-	        
-	        jpqlBuilder.append("FROM EtatCompte occurFlow WHERE 1=1");
+			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(EtatCompte.class);
+
 			if (!StringUtils.isEmpty(login)) {
-				jpqlBuilder.append(" AND login like :loginParam");
-				mapParameters.put("loginParam", "%" + login.toUpperCase() + "%");
+				criteria.add(Restrictions.like("login", "%" + login.toUpperCase() + "%"));
 			}
 			if (montantMin != null) {
-				jpqlBuilder.append(" AND montant >= :montantMinParam");
-				mapParameters.put("montantMinParam", montantMin);
+				criteria.add(Restrictions.ge("montant", montantMin));
 			}
 			if (montantMax != null) {
-				jpqlBuilder.append(" AND montant <= :montantMaxParam");
-				mapParameters.put("montantMaxParam", montantMax);
+				criteria.add(Restrictions.le("montant", montantMax));
 			}
-			
-			Query query = entityManager.createQuery(jpqlBuilder.toString());
-	        
-	        if (mapParameters != null){
-	            for (Map.Entry<String, Object> parameter : mapParameters.entrySet()){
-	                query.setParameter(parameter.getKey(), parameter.getValue());                
-	            }
-	        }
 
-			 listEtatCompte = query.getResultList();
+			List<EtatCompte> listEtatCompte = criteria.list();
+			return listEtatCompte;
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
 		}
-		return listEtatCompte;
 	}
 
 	/*
@@ -155,8 +133,7 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	public void createOperationCompte(OperationCompte operationCompte) throws DAOException {
 		try {
 			operationCompte.setDateOperation(new Date());
-			this.entityManager.persist(operationCompte);
-			this.entityManager.refresh(operationCompte);
+			this.sessionFactory.getCurrentSession().save(operationCompte);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -172,12 +149,12 @@ public class BanqueDAOImpl implements IBanqueDAO {
 		List<OperationCompte> listOperationCompte = null;
 		try {
 
-			Query query = this.entityManager.createQuery(REQUEST_SELECT_LAST_OPERATION);
-			query.setParameter("login", login);
+			Query query = this.sessionFactory.getCurrentSession().createQuery(REQUEST_SELECT_LAST_OPERATION);
+			query.setString("login", login);
 			if (numberOperation != null) {
 				query.setMaxResults(numberOperation);
 			}	
-			listOperationCompte = query.getResultList();
+			listOperationCompte = query.list();
 		
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
