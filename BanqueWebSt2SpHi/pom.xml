@@ -233,6 +233,11 @@
 		    <groupId>org.apache.struts.xwork</groupId>
     		<artifactId>xwork-core</artifactId>
   		</dependency>
+  		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+  		
   				
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>

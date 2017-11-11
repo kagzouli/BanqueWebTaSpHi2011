@@ -11,7 +11,7 @@
 <html>
 <head>
 <title>TBanqueDemo</title>	
-<meta http-equiv="Content-Type" content="text/html; charset=${message:page.encoding}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="<s:url value='/style.css'/>"" media="screen" />
 </head>
 <body>
