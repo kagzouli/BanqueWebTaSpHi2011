@@ -401,6 +401,7 @@
 		<module>BanqueService</module>
 		<module>BanqueWebSt2SpHi</module>
 		<module>BanqueWebTaSpHi</module>
+		<module>BanqueEarSpHi</module>
 	</modules>
 
 
