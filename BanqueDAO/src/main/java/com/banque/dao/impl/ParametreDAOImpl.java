@@ -21,7 +21,7 @@ public class ParametreDAOImpl implements IParametreDAO{
 	/** Logger **/
 	public static final Log LOG = LogFactory.getLog(ParametreDAOImpl.class);
 	
-	@PersistenceContext //(name="CigarUnit",unitName="CigarUnit")
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	

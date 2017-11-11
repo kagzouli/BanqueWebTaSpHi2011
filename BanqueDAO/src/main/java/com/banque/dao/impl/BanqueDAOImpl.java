@@ -37,7 +37,7 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	/** Requete pour recuperer les dernieres operations d'un login donne. **/
 	private static final String REQUEST_SELECT_LAST_OPERATION = "from OperationCompte where login = :login order by id desc";
 
-	@PersistenceContext //(name="CigarUnit",unitName="CigarUnit")
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	/*
@@ -48,7 +48,6 @@ public class BanqueDAOImpl implements IBanqueDAO {
 
 		try {
 			this.entityManager.persist(etatCompte);
-			this.entityManager.refresh(etatCompte);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -99,7 +98,6 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	public void createEtatCompte(EtatCompte etatCompte) throws DAOException {
 		try {
 			this.entityManager.persist(etatCompte);
-			this.entityManager.refresh(etatCompte);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -156,7 +154,6 @@ public class BanqueDAOImpl implements IBanqueDAO {
 		try {
 			operationCompte.setDateOperation(new Date());
 			this.entityManager.persist(operationCompte);
-			this.entityManager.refresh(operationCompte);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);

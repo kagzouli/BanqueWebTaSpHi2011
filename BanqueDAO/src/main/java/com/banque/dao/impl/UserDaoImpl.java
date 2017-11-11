@@ -22,7 +22,7 @@ public class UserDaoImpl implements IUserDao {
 
 	public static final Log LOG = LogFactory.getLog(UserDaoImpl.class);
 	
-	@PersistenceContext //(name="CigarUnit",unitName="CigarUnit")
+	@PersistenceContext 
 	private EntityManager entityManager;
 
 
@@ -33,7 +33,6 @@ public class UserDaoImpl implements IUserDao {
 	public void createUser(User newUser) throws DAOException {
 		try {
 			this.entityManager.persist(newUser);
-			this.entityManager.refresh(newUser);			
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
