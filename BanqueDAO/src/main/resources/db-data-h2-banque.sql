@@ -1,23 +1,24 @@
 DROP TABLE IF EXISTS role;
 CREATE TABLE role(
-   idrole integer NOT NULL,
-   labelrole varchar(100) NOT NULL,
-   PRIMARY KEY(idrole));
+   idrole integer primary key auto_increment not null,
+   labelrole varchar(100) NOT NULL);
 
 DROP TABLE IF EXISTS utilisateur;
 CREATE TABLE utilisateur(
-   id integer NOT NULL AUTO_INCREMENT,
+   id integer primary key auto_increment not null,
    login varchar(100) NOT NULL,
    password varchar(200) NOT NULL,
    idrole INTEGER NOT NULL,
-   PRIMARY KEY(id),
-   index(login),
    Foreign Key (idrole) references role(idrole));
+
+CREATE INDEX login_index ON utilisateur(login);
+CREATE INDEX login_pass_index ON utilisateur(login , password);
+
 
 DROP TABLE IF EXISTS banque;
 CREATE TABLE banque(
    login varchar(45) NOT NULL,
-   montant float NOT NULL,
+   montant decimal NOT NULL,
    Foreign Key (login) references utilisateur(login));
 
 DROP TABLE IF EXISTS operationcompte;
