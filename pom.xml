@@ -26,12 +26,12 @@
 		<junit.version>4.12</junit.version>
 		<jee.version>7.0</jee.version>
 		<jfreechart.version>1.0.9</jfreechart.version>
-		<commons.logging>1.0.3</commons.logging>
-		<aspectj.version>1.5.4</aspectj.version>
+		<commons.logging>1.2</commons.logging>
+		<aspectj.version>1.8.11</aspectj.version>
 		<commonio.version>1.4</commonio.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<hibernateannot.version>3.4.0.GA</hibernateannot.version>
-		<ehcache.version>1.6.2</ehcache.version>
+		<ehcache.version>2.10.4</ehcache.version>
 		<javaassist.version>3.19.0-GA</javaassist.version>
 		<jcommon.version>1.0.17</jcommon.version>
 		<ognl.version>2.7.3</ognl.version>
@@ -261,7 +261,6 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-	
 		
 		<dependency>
 		    <groupId>org.apache.struts</groupId>
