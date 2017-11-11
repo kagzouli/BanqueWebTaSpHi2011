@@ -15,7 +15,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 @Entity
 @Table(name = "operationcompte", schema = "")
-
 public class OperationCompte {
 
 	@Id

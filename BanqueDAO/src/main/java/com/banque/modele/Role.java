@@ -9,9 +9,14 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+
 @Entity
+// JPA trop peu parametrable @Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "role", schema = "", uniqueConstraints = @UniqueConstraint(columnNames = { "idrole" }))
+
+//Hibernate Tag
+
 public class Role {
 	
 	@Id

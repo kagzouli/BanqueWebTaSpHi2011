@@ -10,8 +10,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
+
 @Entity
+// JPA trop peu parametrable@Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
 @Table(name = "parametre", schema = "", uniqueConstraints = @UniqueConstraint(columnNames = { "code" }))
 public class Parametre {
 	

@@ -16,9 +16,13 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+
 @Entity
+// JPA Annotation trop peu parametrable.. @Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
 @Table(name = "utilisateur", schema = "", uniqueConstraints = @UniqueConstraint(columnNames = { "id" }))
+
 public class User implements Serializable,Comparable<User> {
 
 	/**
