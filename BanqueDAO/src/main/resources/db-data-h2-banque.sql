@@ -1,3 +1,5 @@
+SET AUTOCOMMIT FALSE;
+
 DROP TABLE IF EXISTS role;
 CREATE TABLE role(
    idrole integer primary key auto_increment not null,
@@ -59,3 +61,5 @@ INSERT INTO parametre(code,label,description,valeur) values('NBPTAFFGRA','nombre
 INSERT INTO parametre(code,label,description,valeur) values('NBPTMAXCOUGRA','nombre de points maximum courbe graphique','Nombre de points maximum que l''on peut afficher sur le graphique',10);
 
 commit;
+
+SET AUTOCOMMIT TRUE;

@@ -36,6 +36,11 @@ public class BanqueTaSpHiSecurityRealm extends SimpleSecurityRealmBase{
      */
     public boolean booleanAuthenticate(String username, String password) {
         try {
+        	
+        	if (StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+        		return false;
+        	}
+        	
         	List<User> listUsers = userService.findAll();
         	LOG.info("Size : " + listUsers.size());
             User user = userService.findUserByLoginPassword(username, password);
