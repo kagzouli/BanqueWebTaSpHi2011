@@ -24,7 +24,6 @@ import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.event.ConfigurationErrorEvent;
 import org.apache.commons.configuration.event.ConfigurationErrorListener;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
-import org.apache.commons.jxpath.JXPathInvalidSyntaxException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -84,7 +83,7 @@ final class ApacheCommonsConfigurationSource implements IConfigurationSource {
         Properties properties;
         try {
              ConfigurationConverter.getProperties(getConfig());
-        } catch (JXPathInvalidSyntaxException e) {
+        } catch (Exception e) {
             logger.warn("Some configuration contains invalid XPath", e);
            Iterator keys = config.getKeys();
            String key = null;
@@ -92,7 +91,7 @@ final class ApacheCommonsConfigurationSource implements IConfigurationSource {
                 try {
                     key = (String) keys.next();
                     config.getList(key);
-                } catch (JXPathInvalidSyntaxException e2) {
+                } catch (Exception e2) {
                     logger.warn("Removing key [" + key + "] from CombinedConfiguration");
                     config.clearProperty(key);
                 }
