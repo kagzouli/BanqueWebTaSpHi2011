@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,7 +31,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	public void createUser(User newUser) throws DAOException {
 		try {
-			this.sessionFactory.getCurrentSession().save(newUser);
+			this.getSession().save(newUser);
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -43,7 +44,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	public List<User> findAll() throws DAOException {
 		try {
-			Query query = this.sessionFactory.getCurrentSession().createQuery("from User as c order by c.login");
+			Query query = this.getSession().createQuery("from User as c order by c.login");
 			query.setCacheable(true);
 			return (List<User>) query.list();
 
@@ -60,7 +61,7 @@ public class UserDaoImpl implements IUserDao {
 	public User findUserById(Integer id) throws DAOException {
 		User user = null;
 		try {
-			user = (User) this.sessionFactory.getCurrentSession().load(User.class, id);
+			user = (User) this.getSession().load(User.class, id);
 			LOG.debug("Id user :" + user.getId());
 		} catch (ObjectNotFoundException exception) {
 			LOG.info("Utilisateur avec l'id " + id + " non trouve.");
@@ -76,7 +77,7 @@ public class UserDaoImpl implements IUserDao {
 	public User findUserByLoginPassword(final String login, String password) throws DAOException {
 		User user = null;
 		try {
-			Query query = this.sessionFactory.getCurrentSession().createQuery("FROM User where login=:loginParam and password= :passwordParam");
+			Query query = this.getSession().createQuery("FROM User where login=:loginParam and password= :passwordParam");
 			query.setCacheable(true);
 			query.setString("loginParam", login);
 			query.setString("passwordParam", password);
@@ -100,7 +101,7 @@ public class UserDaoImpl implements IUserDao {
 	public User findUserByLogin(String login) throws DAOException {
 		User user = null;
 		try {
-			Query query = this.sessionFactory.getCurrentSession().createQuery("FROM User where login=:loginParam");
+			Query query = this.getSession().createQuery("FROM User where login=:loginParam");
 			query.setCacheable(true);
 			query.setString("loginParam", login);
 
@@ -121,7 +122,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	public List<Role> findRoles() throws DAOException {
 		List<Role> listRoles = new ArrayList<Role>();
-		Query query = this.sessionFactory.getCurrentSession().createQuery("from Role as c order by c.id");
+		Query query = this.getSession().createQuery("from Role as c order by c.id");
 		query.setCacheable(true);
 		return (List<Role>) query.list();
 	}
@@ -133,7 +134,7 @@ public class UserDaoImpl implements IUserDao {
 	public Role findRoleByLabel(String label) throws DAOException {
 		Role role = null;
 		try {
-			Query query = this.sessionFactory.getCurrentSession().createQuery("FROM Role where label=:labelRoleParam");
+			Query query = this.getSession().createQuery("FROM Role where label=:labelRoleParam");
 			query.setCacheable(true);
 			query.setString("labelRoleParam", label);
 
@@ -155,7 +156,7 @@ public class UserDaoImpl implements IUserDao {
 	public Role findRoleById(Integer id) throws DAOException {
 		Role role = null;
 		try {
-			role = (Role) this.sessionFactory.getCurrentSession().load(Role.class, id);
+			role = (Role) this.getSession().load(Role.class, id);
 			LOG.debug("Id role :" + role.getId());
 		} catch (ObjectNotFoundException exception) {
 			LOG.info("Role avec l'id " + id + " non trouve.");
@@ -171,7 +172,7 @@ public class UserDaoImpl implements IUserDao {
 	public Role findRoleByLogin(final String login) throws DAOException {
 		User user = null;
 		try {
-			Query query = this.sessionFactory.getCurrentSession().createQuery("FROM User where login=:loginParam");
+			Query query = this.getSession().createQuery("FROM User where login=:loginParam");
 			query.setCacheable(true);
 			query.setString("loginParam", login);
 
@@ -185,5 +186,9 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return user.getRole();
 
+	}
+	
+	protected Session getSession(){
+		return this.sessionFactory.getCurrentSession();
 	}
 }

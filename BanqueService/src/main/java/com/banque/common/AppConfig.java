@@ -65,7 +65,6 @@ public class AppConfig {
 	    props.put("hibernate.cache.use_query_cache", "true");
 	    props.put("hibernate.show_sql", "true");
 	    props.put("connection.autocommit", "false");
-	    props.put("hibernate.hbm2ddl.auto", "create");
 	    localSessionFactoryBean.setHibernateProperties(props);
 	    
 	    return localSessionFactoryBean;

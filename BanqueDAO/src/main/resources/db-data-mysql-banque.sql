@@ -1,7 +1,5 @@
 use banqueweb;
 
-DROP TABLE IF EXISTS OPERATION_USER_TABLE;
-
 CREATE TABLE role(
    idrole integer NOT NULL,
    labelrole varchar(100) NOT NULL,

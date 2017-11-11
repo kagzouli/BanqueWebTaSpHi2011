@@ -25,6 +25,7 @@ import com.banque.service.exception.PlafondMaxAtteintException;
 import com.banque.service.exception.TechnicalException;
 
 @Service("banqueService")
+@Transactional(readOnly=true)
 public class BanqueImpl implements IBanque {
 
 	public static final Log LOG = LogFactory.getLog(BanqueImpl.class);
@@ -210,6 +211,7 @@ public class BanqueImpl implements IBanque {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IBanque#createEtatCompte(java.lang.String)
 	 */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void createEtatCompte(final String login) throws TechnicalException {
 		try {
 			EtatCompte etatCompte = new EtatCompte(login, BigDecimal.valueOf(0));

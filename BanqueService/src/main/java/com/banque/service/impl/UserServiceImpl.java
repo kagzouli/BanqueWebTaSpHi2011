@@ -29,6 +29,7 @@ import com.banque.service.exception.ParametreNotFoundException;
 import com.banque.service.exception.TechnicalException;
 
 @Service("userService")
+@Transactional(readOnly=true)
 public class UserServiceImpl implements IUserService {
 
 	public static final Log LOG = LogFactory.getLog(BanqueImpl.class);
