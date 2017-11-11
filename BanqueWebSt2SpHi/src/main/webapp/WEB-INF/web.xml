@@ -11,10 +11,10 @@
          <param-value>/WEB-INF/tiles.xml</param-value>
      </context-param>
 	<context-param>
-    	<param-name>contextConfigLocation</param-name>
-    	<param-value>/WEB-INF/applicationContext.xml,/WEB-INF/web-application-context.xml</param-value>
-    </context-param>
-
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/web-application-context.xml</param-value>
+	</context-param>
+	
   	<filter>
       <filter-name>BanqueWebSt2SpHiSecurityFilter</filter-name>
       <filter-class>org.securityfilter.filter.SecurityFilter</filter-class>
