@@ -6,32 +6,60 @@
 
 <securityfilter-config>
 
-   <security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Jsp bloqué</web-resource-name>
-			<description>Jsp bloqué</description>
-			<url-pattern>/jsp/page/*</url-pattern>
-			<http-method>HEAD</http-method>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
-			<http-method>PUT</http-method>
-			<http-method>DELETE</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-		</auth-constraint>
-	</security-constraint>
-	
-    <security-constraint>
+  	<security-constraint>
 		<display-name>Authentification admin</display-name>
 		<!-- Liste des pages protégées -->
 		<web-resource-collection>
 			<web-resource-name>Page sécurisée</web-resource-name>
-			<url-pattern>/kpi/*</url-pattern>
+			<url-pattern>/user/*</url-pattern>
+			<url-pattern>/fr/user/*</url-pattern>
+			<url-pattern>/en/user/*</url-pattern>
+
 		</web-resource-collection>
 		<!-- Rôles des utilisateurs ayant le droit d'y accéder -->
 		<auth-constraint>
 			<role-name>admin</role-name>
 		</auth-constraint>
+	</security-constraint>
+	
+	
+	<security-constraint>
+		<display-name>Authentification User</display-name>
+		<!-- Liste des pages protégées -->
+		<web-resource-collection>
+			<web-resource-name>Page sécurisée</web-resource-name>
+			<url-pattern>/banque/*</url-pattern>
+			<url-pattern>/fr/banque/*</url-pattern>
+			<url-pattern>/en/banque/*</url-pattern>
+
+		</web-resource-collection>
+		<!-- Rôles des utilisateurs ayant le droit d'y accéder -->
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Authentification admin</display-name>
+		<!-- Liste des pages protégées -->
+		<web-resource-collection>
+			<web-resource-name>Page sécurisée</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<!-- Rôles des utilisateurs ayant le droit d'y accéder -->
+		<auth-constraint>
+			<role-name>admin</role-name>
+			<role-name>user</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+		<security-constraint>
+		<display-name>Authentification admin</display-name>
+		<!-- Liste des pages protégées -->
+		<web-resource-collection>
+			<web-resource-name>Page sécurisée</web-resource-name>
+			<url-pattern>/style.css</url-pattern>
+		</web-resource-collection>
 	</security-constraint>
 
    <login-config>
@@ -43,11 +71,17 @@
  	 </form-login-config>
    </login-config>
 	
-   <security-role>
-	 <description>Roles</description>
-  	 <role-name>admin</role-name>
-   </security-role>
+   <!-- Rôles utilisés dans l'application -->
+	<security-role>
+		<description>Roles admin</description>
+		<role-name>admin</role-name>
+	</security-role>
 
-    <realm className="com.bnpp.pf.bird.kpi.authentification.KpiSecurityRealm" />
+	<security-role>
+		<description>Roles user</description>
+		<role-name>user</role-name>
+	</security-role>
+
+    <realm className="com.banque.security.BanqueTaSpHiSecurityRealm" />
 
 </securityfilter-config>
