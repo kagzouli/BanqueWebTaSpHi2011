@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.banque.dao.IUserDao;
@@ -20,10 +21,6 @@ import com.banque.modele.User;
 public class UserDaoImpl implements IUserDao {
 
 	public static final Log LOG = LogFactory.getLog(UserDaoImpl.class);
-
-	// Hibernate annotation
-	//@Autowired
-	//private SessionFactory sessionFactory;	
 	
 	@PersistenceContext //(name="CigarUnit",unitName="CigarUnit")
 	private EntityManager entityManager;
@@ -36,10 +33,7 @@ public class UserDaoImpl implements IUserDao {
 	public void createUser(User newUser) throws DAOException {
 		try {
 			this.entityManager.persist(newUser);
-			this.entityManager.refresh(newUser);
-			
-			// Hibernate call
-			// this.getSession().save(newUser);
+			this.entityManager.refresh(newUser);			
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -52,9 +46,9 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	public List<User> findAll() throws DAOException {
 		try {
-			Query query = this.getSession().createQuery("from User as c order by c.login");
-			query.setCacheable(true);
-			return (List<User>) query.list();
+			Query query = this.entityManager.createQuery("from User as c order by c.login");
+			query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+			return (List<User>) query.getResultList();
 
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
@@ -69,11 +63,8 @@ public class UserDaoImpl implements IUserDao {
 	public User findUserById(Integer id) throws DAOException {
 		User user = null;
 		try {
-			user = (User) this.getSession().load(User.class, id);
+			user = this.entityManager.find(User.class, id);
 			LOG.debug("Id user :" + user.getId());
-		} catch (ObjectNotFoundException exception) {
-			LOG.info("Utilisateur avec l'id " + id + " non trouve.");
-			return null;
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -85,16 +76,14 @@ public class UserDaoImpl implements IUserDao {
 	public User findUserByLoginPassword(final String login, String password) throws DAOException {
 		User user = null;
 		try {
-			Query query = this.getSession().createQuery("FROM User where login=:loginParam and password= :passwordParam");
-			query.setCacheable(true);
-			query.setString("loginParam", login);
-			query.setString("passwordParam", password);
+			Query query = this.entityManager.createQuery("FROM User where login=:loginParam and password= :passwordParam");
+			query.setParameter("loginParam", login);
+			query.setParameter("passwordParam", password);
 
-			List<User> listUser = query.list();
-			if ((listUser != null) && (!listUser.isEmpty())) {
-				user = listUser.get(0);
-			}
-		} catch (Exception exception) {
+			user = (User) query.getSingleResult();
+		}catch(NoResultException noResultException){
+			LOG.warn("No result has been found for findUserByLoginPassword for parameter login = '" + login +"' and password='" + password+ "'");
+		}catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
 		}
@@ -109,15 +98,14 @@ public class UserDaoImpl implements IUserDao {
 	public User findUserByLogin(String login) throws DAOException {
 		User user = null;
 		try {
-			Query query = this.getSession().createQuery("FROM User where login=:loginParam");
-			query.setCacheable(true);
-			query.setString("loginParam", login);
+			Query query = this.entityManager.createQuery("FROM User where login=:loginParam");
+			query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+			query.setParameter("loginParam", login);
 
-			List<User> listUser = query.list();
-			if ((listUser != null) && (!listUser.isEmpty())) {
-				user = listUser.get(0);
-			}
-		} catch (Exception exception) {
+			user = (User) query.getSingleResult();
+		} catch(NoResultException noResultException){
+			LOG.warn("No result has been found for findUserByLogin for parameter login = '" + login +"'");
+		}catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
 		}
@@ -130,9 +118,9 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	public List<Role> findRoles() throws DAOException {
 		List<Role> listRoles = new ArrayList<Role>();
-		Query query = this.getSession().createQuery("from Role as c order by c.id");
-		query.setCacheable(true);
-		return (List<Role>) query.list();
+		Query query = this.entityManager.createQuery("from Role as c order by c.id");
+		query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+		return (List<Role>) query.getResultList();
 	}
 
 	/*
@@ -142,15 +130,14 @@ public class UserDaoImpl implements IUserDao {
 	public Role findRoleByLabel(String label) throws DAOException {
 		Role role = null;
 		try {
-			Query query = this.getSession().createQuery("FROM Role where label=:labelRoleParam");
-			query.setCacheable(true);
-			query.setString("labelRoleParam", label);
+			Query query = this.entityManager.createQuery("FROM Role where label=:labelRoleParam");
+			query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+			query.setParameter("labelRoleParam", label);
 
-			List<Role> listRole = query.list();
-			if ((listRole != null) && (!listRole.isEmpty())) {
-				role = listRole.get(0);
-			}
-		} catch (Exception exception) {
+			role = (Role) query.getSingleResult();
+		}catch(NoResultException noResultException){
+			LOG.warn("No result has been found for findRoleByLabel for parameter role label = '" + label +"'");
+		}catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
 		}
@@ -164,11 +151,8 @@ public class UserDaoImpl implements IUserDao {
 	public Role findRoleById(Integer id) throws DAOException {
 		Role role = null;
 		try {
-			role = (Role) this.getSession().load(Role.class, id);
+			role = this.entityManager.find(Role.class, id);
 			LOG.debug("Id role :" + role.getId());
-		} catch (ObjectNotFoundException exception) {
-			LOG.info("Role avec l'id " + id + " non trouve.");
-			return null;
 		} catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
@@ -178,26 +162,23 @@ public class UserDaoImpl implements IUserDao {
 	
 	@Override
 	public Role findRoleByLogin(final String login) throws DAOException {
-		User user = null;
+		Role role = null;
 		try {
-			Query query = this.getSession().createQuery("FROM User where login=:loginParam");
-			query.setCacheable(true);
-			query.setString("loginParam", login);
+			Query query = this.entityManager.createQuery("FROM User where login=:loginParam");
+			query.setHint("org.hibernate.cacheable", Boolean.TRUE);
+			query.setParameter("loginParam", login);
 
-			List<User> listUser = query.list();
-			if ((listUser != null) && (!listUser.isEmpty())) {
-				user = listUser.get(0);
+			final User user = (User) query.getSingleResult();
+			if (user != null){
+				role = user.getRole();
 			}
-		} catch (Exception exception) {
+		}catch(NoResultException noResultException){
+			LOG.warn("No result has been found for findRoleByLogin for parameter login = '" + login +"'");
+		}catch (Exception exception) {
 			LOG.error(exception.getMessage(), exception);
 			throw new DAOException(exception);
 		}
-		return user.getRole();
+		return role;
 
-	}
-	
-	// Hibernate method.
-	/*protected Session getSession(){
-		return this.sessionFactory.getCurrentSession();
-	}*/
+	}	
 }
