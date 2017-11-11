@@ -50,7 +50,7 @@ public class ListeParametre {
 	/** Image modification **/
 	@Property
 	@Inject
-	@Path("context:images/supprimer.png")
+	@Path("context:images/supprimer.gif")
 	private Asset imageSuppression;
 	
 	void onActivate() throws Exception {
