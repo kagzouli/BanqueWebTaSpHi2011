@@ -2,10 +2,18 @@
 
         <!-- Sybase ASE default datasource DEV --> 
         
-        <Resource name="jdbc/banque" auth="Container" type="javax.sql.DataSource" 
+      <!--    <Resource name="jdbc/banque" auth="Container" type="javax.sql.DataSource" 
                           maxActive="7" maxIdle="-1" maxWait="10000" 
                           username="sa" password="" 
                           driverClassName="org.h2.Driver" 
                           url="jdbc:h2:~/data/banquesptahi;INIT=create schema if not exists banquesptahi\; RUNSCRIPT FROM 'classpath:db-data-h2-banque.sql'" /> 
-                                  
+                          
+                          
+            -->    
+            
+            <Resource name="jdbc/banque" auth="Container" type="javax.sql.DataSource" 
+                          maxActive="7" maxIdle="-1" maxWait="10000" 
+                          username="banque_ta" password="password" 
+                          driverClassName="com.mysql.jdbc.Driver" 
+                          url="jdbc:mysql://localhost:3306/banqueweb" />                   
 </Context> 

@@ -128,13 +128,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
         </dependency>
-        
-		
 
-
-
-
-		<!-- MySQL DEPENDENCIES -->
 	</dependencies>
 	<build>
 		<plugins>

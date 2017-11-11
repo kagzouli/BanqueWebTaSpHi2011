@@ -1,3 +1,5 @@
+use banqueweb;
+
 DROP TABLE IF EXISTS OPERATION_USER_TABLE;
 
 CREATE TABLE role(
