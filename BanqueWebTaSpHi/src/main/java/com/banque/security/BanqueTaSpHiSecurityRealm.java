@@ -22,7 +22,6 @@ public class BanqueTaSpHiSecurityRealm extends SimpleSecurityRealmBase{
     private IUserService userService = SpringApplicationContext.getBean(IUserService.class);
     
 
-
     /**
      * Authenticate a user.
      *

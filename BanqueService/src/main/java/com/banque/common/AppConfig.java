@@ -30,7 +30,8 @@ import com.banque.modele.User;
 @EnableTransactionManagement
 @ComponentScans(value = { 
 	      @ComponentScan("com.banque.service"),
-	      @ComponentScan("com.banque.dao") 
+	      @ComponentScan("com.banque.dao"),
+	      @ComponentScan("com.banque.common") 
 	    })
 public class AppConfig {
 	
@@ -41,8 +42,7 @@ public class AppConfig {
 	
 	private static final String SESSION_FACTORY = "sessionFactory";
 	
-	public static final String TRANSACTION_MANAGER = "txTestManager";
-	
+	public static final String TRANSACTION_MANAGER = "txTestManager";	
 	
 	
 	@Bean(name=BANQUE_DATASOURCE_NAME)
@@ -81,6 +81,11 @@ public class AppConfig {
 		HibernateTransactionManager hibernateTrasactionManager = new HibernateTransactionManager();
 		hibernateTrasactionManager.setSessionFactory(context.getBean(SESSION_FACTORY,SessionFactory.class));
 		return hibernateTrasactionManager;
+	}
+	
+	@Bean
+	public SpringApplicationContext springApplicationContext(){
+		return new SpringApplicationContext();
 	}
 	
 	/*
