@@ -6,6 +6,6 @@
                           maxActive="7" maxIdle="-1" maxWait="10000" 
                           username="sa" password="" 
                           driverClassName="org.h2.Driver" 
-                          url="jdbc:h2:~/data/banquesptahi;INIT=RUNSCRIPT FROM 'classpath:db-data-h2-banque.sql'" /> 
+                          url="jdbc:h2:~/data/banquesptahi;INIT=create schema if not exists banquesptahi\; RUNSCRIPT FROM 'classpath:db-data-h2-banque.sql'" /> 
                                   
 </Context> 

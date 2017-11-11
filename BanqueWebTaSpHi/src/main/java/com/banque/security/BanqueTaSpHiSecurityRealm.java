@@ -1,5 +1,7 @@
 package com.banque.security;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.securityfilter.realm.SimpleSecurityRealmBase;
@@ -34,6 +36,8 @@ public class BanqueTaSpHiSecurityRealm extends SimpleSecurityRealmBase{
      */
     public boolean booleanAuthenticate(String username, String password) {
         try {
+        	List<User> listUsers = userService.findAll();
+        	LOG.info("Size : " + listUsers.size());
             User user = userService.findUserByLoginPassword(username, password);
             return  user != null && !StringUtils.isBlank(user.getLogin());
         }catch (Exception exception) {
