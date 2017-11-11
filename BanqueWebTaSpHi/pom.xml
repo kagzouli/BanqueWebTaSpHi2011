@@ -210,6 +210,7 @@
 
 	</dependencies>
 	<build>
+	   <finalName>BanqueWebTaSpHi</finalName>
 		<plugins>			
 		</plugins>
 	</build>

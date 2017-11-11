@@ -253,6 +253,7 @@
 		
 	</dependencies>
 	<build>
+	  <finalName>BanqueWebSt2SpHi</finalName>
 		<plugins>
 		</plugins>
 	</build>
