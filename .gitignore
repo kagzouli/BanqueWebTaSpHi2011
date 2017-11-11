@@ -35,7 +35,6 @@ Servers/
 ######################
 
 *.log
-*.sql
 *.sqlite
 
 # OS generated files #
