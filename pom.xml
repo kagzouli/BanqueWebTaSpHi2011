@@ -10,7 +10,6 @@
 		<commons.lang.version>2.6</commons.lang.version>
 		<java.version>1.8</java.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		<c3p0.version>0.9.1.2</c3p0.version>
 		<spring.version>4.3.12.RELEASE</spring.version>
 		<tapestry.version>5.2.5</tapestry.version>
 		<h2.version>1.4.196</h2.version>
@@ -29,10 +28,9 @@
 		<commons.logging>1.2</commons.logging>
 		<aspectj.version>1.8.11</aspectj.version>
 		<commonio.version>1.4</commonio.version>
-		<hibernate.version>3.3.2.GA</hibernate.version>
-		<hibernateannot.version>3.4.0.GA</hibernateannot.version>
+		<hibernate.version>5.0.12.Final</hibernate.version>
 		<ehcache.version>2.10.4</ehcache.version>
-		<javaassist.version>3.19.0-GA</javaassist.version>
+		<javassist.version>3.21.0-GA</javassist.version> <!-- Same as Hibernate -->
 		<jcommon.version>1.0.17</jcommon.version>
 		<ognl.version>2.7.3</ognl.version>
 		<commons-digester.version>2.1</commons-digester.version>
@@ -166,25 +164,29 @@
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${hibernateannot.version}</version>
-			<type>jar</type>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>org.hibernate</groupId>
-					<artifactId>hibernate-core</artifactId>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.enterprise</groupId>
+					<artifactId>cdi-api</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
 			<version>${hibernate.version}</version>
+			<exclusions>
+			   <exclusion>
+			     	<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache-core</artifactId>
+			   </exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
@@ -226,7 +228,7 @@
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>${javaassist.version}</version>
+			<version>${javassist.version}</version>
 		</dependency>
 		
 		<dependency>

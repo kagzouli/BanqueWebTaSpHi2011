@@ -11,7 +11,10 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.banque.common.AppConfig;
 import com.banque.dao.IBanqueDAO;
 import com.banque.dao.IParametreDAO;
 import com.banque.dao.IUserDao;
@@ -58,6 +61,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#createUser(com.banque.modele.User, java.lang.String)
 	 */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void createUser(final User newUser, final String passwordNotCrypt) throws LoginDejaExistantException {
 		final String login = newUser.getLogin();
 
@@ -300,6 +304,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#update(java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)
 	 */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void updateParametre(String code, String label, String description, Integer valeur) {
 		try {
 			Parametre parametre = parametrageDao.findByCode(code);
@@ -329,6 +334,7 @@ public class UserServiceImpl implements IUserService {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IUserService#delete(java.lang.String)
 	 */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void deleteParametre(String code) {
 		try {
 			Parametre parametre = parametrageDao.findByCode(code);

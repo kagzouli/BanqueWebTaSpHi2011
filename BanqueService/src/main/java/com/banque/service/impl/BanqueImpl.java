@@ -9,7 +9,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.banque.common.AppConfig;
 import com.banque.dao.IBanqueDAO;
 import com.banque.modele.EtatCompte;
 import com.banque.modele.OperationCompte;
@@ -46,6 +49,7 @@ public class BanqueImpl implements IBanque {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IBanque#crediter(java.lang.String, java.lang.String, java.math.BigDecimal)
 	 */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void crediter(final String libelleOperation, final String login, final BigDecimal montantCrediter) throws LoginInexistantException, PlafondMaxAtteintException, TechnicalException {
 		LOG.info("Objectif : Crediter utilisateur " + login + " d'un montant de " + montantCrediter);
 
@@ -92,6 +96,7 @@ public class BanqueImpl implements IBanque {
  * (non-Javadoc)
  * @see com.banque.service.IBanque#debiter(java.lang.String, java.lang.String, java.math.BigDecimal)
  */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void debiter(final String libelleOperation, final String login, final BigDecimal montant) throws LoginInexistantException, CompteDebiteurException, TechnicalException {
 		LOG.info("Objectif : Debiter utilisateur " + login + " d'un montant de " + montant);
 
@@ -135,7 +140,7 @@ public class BanqueImpl implements IBanque {
 	 * @see com.banque.service.IBanque#findListEtatCompte()
 	 */
 	public List<EtatCompte> findListEtatCompte() throws TechnicalException {
-		List<EtatCompte> listEtatCompte = Collections.EMPTY_LIST;
+		List<EtatCompte> listEtatCompte = Collections.emptyList();
 
 		try {
 			listEtatCompte = banqueDAO.listEtatCompte();
@@ -151,7 +156,7 @@ public class BanqueImpl implements IBanque {
 	 * @see com.banque.service.IBanque#findEtatCompteByParam(java.lang.String, java.math.BigDecimal, java.math.BigDecimal)
 	 */
 	public List<EtatCompte> findEtatCompteByParam(final String login, final BigDecimal montantMin, final BigDecimal montantMax) throws TechnicalException {
-		List<EtatCompte> listEtatCompte = Collections.EMPTY_LIST;
+		List<EtatCompte> listEtatCompte = Collections.emptyList();
 
 		try {
 			listEtatCompte = banqueDAO.listEtatCompte(login, montantMin, montantMax);
@@ -191,6 +196,7 @@ public class BanqueImpl implements IBanque {
 	 * (non-Javadoc)
 	 * @see com.banque.service.IBanque#virement(java.lang.String, java.lang.String, java.lang.String, java.math.BigDecimal)
 	 */
+	@Transactional(rollbackFor=Throwable.class, propagation = Propagation.REQUIRED, transactionManager=AppConfig.TRANSACTION_MANAGER)
 	public void virement(final String libelleOperation, String loginEmetteurVirement, String loginReceveurVirement, final BigDecimal montantVirement) throws LoginInexistantException, CompteDebiteurException, PlafondMaxAtteintException, TechnicalException {
 		// Celui qui recoit le virement se fait crediter.
 		this.crediter(libelleOperation, loginReceveurVirement, montantVirement);

@@ -12,7 +12,6 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.banque.dao.IBanqueDAO;
@@ -26,9 +25,6 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	/** Logger **/
 	public static final Log LOG = LogFactory.getLog(BanqueDAOImpl.class);
 
-	/** Schema (Non utilise) **/
-	private static final String SCHEMA = "testkarim";
-
 	/** Requete pour recuperer l'etat du compte en fonction du login **/
 	private static final String REQUEST_SELECT_LOGIN = "from EtatCompte where login = :login";
 
@@ -39,15 +35,7 @@ public class BanqueDAOImpl implements IBanqueDAO {
 	private static final String REQUEST_SELECT_LAST_OPERATION = "from OperationCompte where login = :login order by id desc";
 
 	@Autowired
-	@Qualifier("testSessionFactory")
 	private SessionFactory sessionFactory;
-
-	@Autowired
-	public BanqueDAOImpl(@Qualifier("testSessionFactory") SessionFactory sessionFactory) {
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("constructeur BanqueDAOImpl.");
-		}
-	}
 
 	/*
 	 * (non-Javadoc)

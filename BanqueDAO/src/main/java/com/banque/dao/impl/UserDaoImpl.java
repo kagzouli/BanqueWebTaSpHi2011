@@ -9,7 +9,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.banque.dao.IUserDao;
@@ -23,15 +22,7 @@ public class UserDaoImpl implements IUserDao {
 	public static final Log LOG = LogFactory.getLog(UserDaoImpl.class);
 
 	@Autowired
-	@Qualifier("testSessionFactory")
-	private SessionFactory sessionFactory;
-
-	@Autowired
-	public UserDaoImpl(@Qualifier("testSessionFactory") SessionFactory sessionFactory) {
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("constructeur UserDaoImpl.");
-		}
-	}
+	private SessionFactory sessionFactory;	
 
 	/*
 	 * (non-Javadoc)

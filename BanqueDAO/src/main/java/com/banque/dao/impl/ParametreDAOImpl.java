@@ -9,7 +9,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.banque.dao.IParametreDAO;
@@ -23,18 +22,11 @@ public class ParametreDAOImpl implements IParametreDAO{
 	public static final Log LOG = LogFactory.getLog(ParametreDAOImpl.class);
 	
 	@Autowired
-	@Qualifier("testSessionFactory")
 	private SessionFactory sessionFactory;
 	
 	/** Requete recuperant l'ensemble des parametres **/
 	private static final String REQUEST_ALL = "from Parametre";
 
-	@Autowired
-	public ParametreDAOImpl(@Qualifier("testSessionFactory") SessionFactory sessionFactory) {
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("constructeur ParametreDAOImpl.");
-		}
-	}
 
 
 	/*
@@ -42,7 +34,7 @@ public class ParametreDAOImpl implements IParametreDAO{
 	 * @see com.banque.dao.IParametreDAO#findAll()
 	 */
 	public List<Parametre> findAll() throws DAOException {
-		List<Parametre> listParametres = Collections.EMPTY_LIST;		
+		List<Parametre> listParametres = Collections.emptyList();	
 		try{
 			Query query = this.sessionFactory.getCurrentSession().createQuery(REQUEST_ALL);
 			listParametres = query.list();			
