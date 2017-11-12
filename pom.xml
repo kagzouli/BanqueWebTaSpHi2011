@@ -37,6 +37,8 @@
 		<commons-configuration.version>1.6</commons-configuration.version>
 		<commons-jxpath.version>1.3</commons-jxpath.version>
 		<oro.version>2.0.8</oro.version>
+		<jta.version>1.2</jta.version>
+		<jpa.version>2.1.0</jpa.version>
 	</properties>
 
 	<dependencyManagement>
@@ -175,6 +177,14 @@
 					<groupId>javax.enterprise</groupId>
 					<artifactId>cdi-api</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-jta_1.1_spec</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate.javax.persistence</groupId>
+					<artifactId>hibernate-jpa-2.1-api</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -204,6 +214,16 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
+			<exclusions>
+			   <exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-jta_1.1_spec</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate.javax.persistence</groupId>
+					<artifactId>hibernate-jpa-2.1-api</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -386,6 +406,16 @@
 			<groupId>oro</groupId>
 			<artifactId>oro</artifactId>
 			<version>${oro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>${jta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>${jpa.version}</version>
 		</dependency>
 
 
