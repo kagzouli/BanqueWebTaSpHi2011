@@ -103,6 +103,15 @@
 			<groupId>oro</groupId>
 			<artifactId>oro</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+		</dependency>
+		
     	
 		<dependency>
 			<groupId>com.exakaconsulting.poc</groupId>
