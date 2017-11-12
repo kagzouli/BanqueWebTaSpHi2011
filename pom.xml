@@ -39,6 +39,9 @@
 		<oro.version>2.0.8</oro.version>
 		<jta.version>1.2</jta.version>
 		<jpa.version>2.1.0</jpa.version>
+		
+		<jpa.scope>compile</jpa.scope>
+		<jta.scope>compile</jta.scope>
 	</properties>
 
 	<dependencyManagement>
@@ -411,11 +414,13 @@
 			<groupId>javax.transaction</groupId>
 			<artifactId>javax.transaction-api</artifactId>
 			<version>${jta.version}</version>
+			<scope>${jta.scope}</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>javax.persistence</artifactId>
 			<version>${jpa.version}</version>
+			<scope>${jpa.scope}</scope>
 		</dependency>
 
 
@@ -464,4 +469,23 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
+	<profiles>
+	  	<profile>
+			<id>tomcat9</id>
+			<properties>
+				<jpa.scope>compile</jpa.scope>
+				<jta.scope>compile</jta.scope>
+			</properties>
+		</profile>
+		<profile>
+			<id>jee7</id>
+			<properties>
+				<jpa.scope>provided</jpa.scope>
+				<jta.scope>provided</jta.scope>	
+			</properties>
+		</profile>
+	</profiles>
+
+	
 </project>
