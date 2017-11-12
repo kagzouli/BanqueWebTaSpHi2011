@@ -1,2 +1,0 @@
-#BigDecimal
-java.math.BigDecimal=com.banque.action.common.BigDecimalConverter
